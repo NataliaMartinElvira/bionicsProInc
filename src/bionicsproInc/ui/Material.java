@@ -1,8 +1,13 @@
 package bionicsproInc.ui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Material {
+public class Material implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7510802237290550541L;
 	private int id;
 	private String name;
 	private float price;

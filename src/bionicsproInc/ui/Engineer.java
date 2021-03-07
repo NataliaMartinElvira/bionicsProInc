@@ -1,21 +1,25 @@
 package bionicsproInc.ui;
-import java.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList; 
 
 
-public class Engineer {
-   private int id; 
-   private String Name_surname; 
-   private Date contract_strating_date; 
-   private Date contract_ending_date; 
-   private String current_service; 
-   private float salary; 
-   private float bonus; 
-   private int project_achieved ; 
-   private int experience_in_years; 
-   private Date date_of_birth; 
-   private ArrayList<Product> products; 
+public class Engineer implements Serializable  {
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7354779387678883946L;
+	private int id; 
+	private String Name_surname; 
+	private Date contract_strating_date; 
+	private Date contract_ending_date; 
+	private String current_service; 
+   	private float salary; 
+   	private float bonus; 
+   	private int project_achieved ; 
+   	private int experience_in_years; 
+   	private Date date_of_birth; 
+   	private ArrayList<Product> products; 
    
    public int getId() {
 	return id;

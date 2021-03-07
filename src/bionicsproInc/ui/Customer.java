@@ -1,12 +1,17 @@
 package bionicsproInc.ui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 enum gender{
 	MALE,FEMALE;
 }
 
-public class Customer {
+public class Customer implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8505884502597501683L;
 	private int person_id;
 	private String first_name;
 	private String last_name;

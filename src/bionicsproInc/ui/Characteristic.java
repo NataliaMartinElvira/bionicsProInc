@@ -1,8 +1,14 @@
 package bionicsproInc.ui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Characteristic { 
+public class Characteristic implements Serializable { 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8095684428083579778L;
 	private int id; 
 	private float length; 
 	private float width; 

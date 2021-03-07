@@ -1,10 +1,15 @@
 package bionicsproInc.ui;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-abstract class Product {
+abstract class Product implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2448117025953730410L;
 	private int id;
 	private String name;
 	private String bodypart;

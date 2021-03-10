@@ -1,7 +1,8 @@
 package bionicsproInc.db.jdbc;
 import java.sql.*;
  public class JDBCManager {
-	 
+	private Connection c;
+	
 	private void createTables(){
 		Statement stmt1;
 		try {

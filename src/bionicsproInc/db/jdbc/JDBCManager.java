@@ -1,7 +1,26 @@
 package bionicsproInc.db.jdbc;
+
 import java.sql.*;
- public class JDBCManager {
+
+public class JDBCManager {
+	 
 	private Connection c;
+	public void connect() {
+		try {
+			// Open database connection
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/bionicsproInc.db");
+			c.createStatement().execute("PRAGMA foreign_keys=ON");
+			System.out.println("Database connection opened.");
+			this.createTables();
+		} catch (SQLException sqlE) {
+			System.out.println("There was a database exception.");
+			sqlE.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("There was a general exception.");
+			e.printStackTrace();
+		}
+	}
 	
 	private void createTables(){
 		Statement stmt1;
@@ -43,4 +62,17 @@ import java.sql.*;
 			}
 		}
 	}
+	
+
+	public void disconnect() {
+		try {
+			// Close database connection
+			c.close();
+		} catch (SQLException e) {
+			System.out.println("There was a problem while closing the database connection.");
+			e.printStackTrace();
+		}
+	}
+	
 }
+

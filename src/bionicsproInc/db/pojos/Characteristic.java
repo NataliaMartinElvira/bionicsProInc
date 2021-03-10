@@ -1,4 +1,4 @@
-package bionicsproInc.ui;
+package bionicsproInc.db.pojos;
 
 import java.io.Serializable;
 import java.util.ArrayList;

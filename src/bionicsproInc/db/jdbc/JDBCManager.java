@@ -20,7 +20,7 @@ import java.sql.*;
 						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						   + " name     TEXT     NOT NULL UNIQUE, "
 						   + "price FLOAT NOT NULL,"
-						   +"product_id INTEGER REFERENCE products(id),"
+						   + "product_id INTEGER REFERENCE products(id),"
 						   + " amount   INTEGER	 NOT NULL)";
 				stmt1.executeUpdate(sql1);
 				sql1= "CREATE TABLE customer "
@@ -36,6 +36,27 @@ import java.sql.*;
 						   + "postal_code INTEGER NOT NULL"
 						   + "order_id INTEGER)";
 				stmt1.executeUpdate(sql1);
+				sql1 = "CREATE TABLE Engineer "
+						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+						   + " Name_surname     TEXT     NOT NULL UNIQUE, "
+						   + " contract_starting_date DATE NOT NULL UNIQUE,"
+						   + " contract_ending_date DATE NOT NULL,"
+						   + " current_service TEXT NOT NULL,"
+						   + " salary FLOAT NOT NULL,"
+						   + " bonus FLOAT NOT NULL,"
+						   + " project_achieved INT NOT NULL,"
+						   + " experience_in_years INT NOT NULL,"
+						   + " date_of_birth DATE NOT NULL,"
+						   + " id_eng_prod INTEGER REFERENCE products(id)";
+				stmt1.executeUpdate(sql1);
+				sql1 = "CREATE TABLE Engineer "
+						   + " length FLOAT NOT NULL,"
+						   + " width FLOAT NOT NULL,"
+						   + " weight FLOAT NOT NULL,"
+						   + " joint_numb INT NOT NULL,"
+						   + " flexibility_scale INT NOT NULL,"
+						   + " id_char_prod INTEGER REFERENCE products(id)";
+				stmt1.executeUpdate(sql1);		
 				stmt1.close();
 		}catch(SQLException e) {
 			if(!e.getMessage().contains("alredy exists")) {

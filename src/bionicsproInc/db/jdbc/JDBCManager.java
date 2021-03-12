@@ -47,7 +47,7 @@ public class JDBCManager {
 						   + " first_name     TEXT     NOT NULL, "
 						   + " last_name   TEXT  	NOT NULL, "
 						   + " age INTEGER NOT NULL,"
-						   + "gender VARCHAR(10) check (gender in ('Male','Female'))"
+						   + "gender TEXT CHECK (gender = 'Male' OR gender = 'Female')"
 						   + "phone INTEGER NOT NULL"
 						   + "email TEXT NOT NULL"
 						   + "street TEXT NOT NULL"

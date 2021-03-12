@@ -36,7 +36,7 @@ import java.sql.*;
 				sql1 = "CREATE TABLE material "
 						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						   + " name     TEXT     NOT NULL UNIQUE, "
-						   + " price FLOAT NOT NULL,"
+						   + " price REAL NOT NULL,"
 						   + " product_id INTEGER REFERENCE products(id),"
 						   + " amount   INTEGER	 NOT NULL)";
 				stmt1.executeUpdate(sql1);
@@ -45,7 +45,7 @@ import java.sql.*;
 						   + " first_name     TEXT     NOT NULL, "
 						   + " last_name   TEXT  	NOT NULL, "
 						   + " age INTEGER NOT NULL,"
-						   + " gender VARCHAR(10) check (gender in ('Male','Female'))"
+						   + " gender TEXT CHECK(gender = 'Male' OR gender = 'Female')"
 						   + " phone INTEGER NOT NULL"
 						   + " email TEXT NOT NULL"
 						   + " street TEXT NOT NULL"

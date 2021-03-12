@@ -36,7 +36,7 @@ import java.sql.*;
 				sql1 = "CREATE TABLE material "
 						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						   + " name     TEXT     NOT NULL UNIQUE, "
-						   + " price FLOAT NOT NULL,"
+						   + " price REAL NOT NULL,"
 						   + " product_id INTEGER REFERENCE products(id),"
 						   + " amount   INTEGER	 NOT NULL)";
 				stmt1.executeUpdate(sql1);

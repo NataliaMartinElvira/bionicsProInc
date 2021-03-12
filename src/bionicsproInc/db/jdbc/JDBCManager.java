@@ -11,16 +11,16 @@ import java.sql.*;
 						   + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						   + " name TEXT NOT NULL, "
 						   + " bodypart  TEXT UNIQUE NOT NULL,"
-						   + "price FLOAT NOT NULL,"
-						   + "date_creation DATE NOT NULL,"
-						   + "photo BLOB,"
-						   + "percentagefb FLOAT NOT NULL )";
+						   + " price REAL NOT NULL,"
+						   + " date_creation DATE NOT NULL,"
+						   + " photo BLOB,"
+						   + " percentagefb REAL NOT NULL )";
 				stmt1.executeUpdate(sql1);
 				sql1 = "CREATE TABLE material "
 						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 						   + " name     TEXT     NOT NULL UNIQUE, "
-						   + "price FLOAT NOT NULL,"
-						   + "product_id INTEGER REFERENCE products(id),"
+						   + " price REAL NOT NULL,"
+						   + " product_id INTEGER REFERENCE products(id),"
 						   + " amount   INTEGER	 NOT NULL)";
 				stmt1.executeUpdate(sql1);
 				sql1= "CREATE TABLE customer "
@@ -28,13 +28,13 @@ import java.sql.*;
 						   + " first_name     TEXT     NOT NULL, "
 						   + " last_name   TEXT  	NOT NULL, "
 						   + " age INTEGER NOT NULL,"
-						   + "gender VARCHAR(10) check (gender in ('Male','Female'))"
-						   + "phone INTEGER NOT NULL"
-						   + "email TEXT NOT NULL"
-						   + "street TEXT NOT NULL"
-						   + "city TEXT NOT NULL"
-						   + "postal_code INTEGER NOT NULL"
-						   + "order_id INTEGER)";
+						   + " gender VARCHAR(10) check (gender in ('Male','Female'))"
+						   + " phone INTEGER NOT NULL"
+						   + " email TEXT NOT NULL"
+						   + " street TEXT NOT NULL"
+						   + " city TEXT NOT NULL"
+						   + " postal_code INTEGER NOT NULL"
+						   + " order_id INTEGER)";
 				stmt1.executeUpdate(sql1);
 				sql1 = "CREATE TABLE Engineer "
 						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
@@ -42,17 +42,17 @@ import java.sql.*;
 						   + " contract_starting_date DATE NOT NULL UNIQUE,"
 						   + " contract_ending_date DATE NOT NULL,"
 						   + " current_service TEXT NOT NULL,"
-						   + " salary FLOAT NOT NULL,"
-						   + " bonus FLOAT NOT NULL,"
+						   + " salary REAL NOT NULL,"
+						   + " bonus REAL NOT NULL,"
 						   + " project_achieved INT NOT NULL,"
 						   + " experience_in_years INT NOT NULL,"
 						   + " date_of_birth DATE NOT NULL,"
 						   + " id_eng_prod INTEGER REFERENCE products(id)";
 				stmt1.executeUpdate(sql1);
-				sql1 = "CREATE TABLE Engineer "
-						   + " length FLOAT NOT NULL,"
-						   + " width FLOAT NOT NULL,"
-						   + " weight FLOAT NOT NULL,"
+				sql1 = "CREATE TABLE Chatacteristics "
+						   + " length REAL NOT NULL,"
+						   + " width REAL NOT NULL,"
+						   + " weight REAL NOT NULL,"
 						   + " joint_numb INT NOT NULL,"
 						   + " flexibility_scale INT NOT NULL,"
 						   + " id_char_prod INTEGER REFERENCE products(id)";

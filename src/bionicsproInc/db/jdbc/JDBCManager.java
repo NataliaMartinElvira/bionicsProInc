@@ -47,6 +47,7 @@ public class JDBCManager {
 						   + " first_name     TEXT     NOT NULL, "
 						   + " last_name   TEXT  	NOT NULL, "
 						   + " age INTEGER NOT NULL,"
+<<<<<<< HEAD
 						   + " gender VARCHAR(10) check (gender in ('Male','Female'))"
 						   + " phone INTEGER NOT NULL"
 						   + " email TEXT NOT NULL"
@@ -54,6 +55,15 @@ public class JDBCManager {
 						   + " city TEXT NOT NULL"
 						   + " postal_code INTEGER NOT NULL"
 						   + " order_id INTEGER)";
+=======
+						   + "gender TEXT CHECK (gender = 'Male' OR gender = 'Female')"
+						   + "phone INTEGER NOT NULL"
+						   + "email TEXT NOT NULL"
+						   + "street TEXT NOT NULL"
+						   + "city TEXT NOT NULL"
+						   + "postal_code INTEGER NOT NULL"
+						   + "order_id INTEGER)";
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc.git
 				stmt1.executeUpdate(sql1);
 				stmt1.close();
 		}catch(SQLException e) {

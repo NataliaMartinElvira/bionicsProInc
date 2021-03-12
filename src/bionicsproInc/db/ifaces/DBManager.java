@@ -1,6 +1,6 @@
 package bionicsproInc.db.ifaces;
 
-public interface DBmanager {
+public interface DBManager {
 	public void connect();
 	public void disconnect();
 }

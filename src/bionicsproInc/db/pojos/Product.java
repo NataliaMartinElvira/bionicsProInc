@@ -19,7 +19,8 @@ abstract class Product implements Serializable {
 	private ArrayList <Material> mats;
 	private Float percentageFb;
 	private ArrayList <Characteristic> christ;
-	private ArrayList <Customer> customers;
+	private ArrayList <Customer> customers; 
+	private ArrayList <Engineer> engineer;
 	
 
 	public Product(int id, String name, String bodypart, Float price, Date date_creation, byte[] photo,
@@ -155,6 +156,14 @@ abstract class Product implements Serializable {
 		} else if (!price.equals(other.price))
 			return false;
 		return true;
+	}
+
+	public ArrayList <Engineer> getEngineer() {
+		return engineer;
+	}
+
+	public void setEngineer(ArrayList <Engineer> engineer) {
+		this.engineer = engineer;
 	}
 	
 	

@@ -61,8 +61,8 @@ import java.sql.*;
 						   + " current_service TEXT NOT NULL,"
 						   + " salary REAL NOT NULL,"
 						   + " bonus REAL NOT NULL,"
-						   + " project_achieved INT NOT NULL,"
-						   + " experience_in_years INT NOT NULL,"
+						   + " project_achieved INTEGER NOT NULL,"
+						   + " experience_in_years INTEGER NOT NULL,"
 						   + " date_of_birth DATE NOT NULL,"
 						   + " id_eng_prod INTEGER REFERENCE products(id)";
 				stmt1.executeUpdate(sql1);
@@ -70,8 +70,8 @@ import java.sql.*;
 						   + " length REAL NOT NULL,"
 						   + " width REAL NOT NULL,"
 						   + " weight REAL NOT NULL,"
-						   + " joint_numb INT NOT NULL,"
-						   + " flexibility_scale INT NOT NULL,"
+						   + " joint_numb INTEGER NOT NULL,"
+						   + " flexibility_scale INTEGER NOT NULL,"
 						   + " id_char_prod INTEGER REFERENCE products(id)";
 				stmt1.executeUpdate(sql1);		
 				stmt1.close();

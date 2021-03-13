@@ -1,7 +1,10 @@
 package bionicsproInc.db.jdbc;
 
 import java.sql.*;
- public class JDBCManager {
+import bionicsproInc.db.ifaces.DBManager;
+import bionicsproInc.db.pojos.*;
+
+ public class JDBCManager implements DBManager{
 	private Connection c;
 	public void connect() {
 		try {
@@ -91,6 +94,25 @@ import java.sql.*;
 			e.printStackTrace();
 		}
 	}
+	public void addMaterial(Material m) {
+		try {
+			Statement st=c.createStatement();
+			String sql= "INSERT INTO material (name,price,product,amount) "
+			+" VALUES ('m.getName()','m.getPrice()', 'm.getProducts()','m.getAmount')";
+			st.executeUpdate(sql);
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	/*
+	public void hireEngineer(Engineer eng) {}
+	
+	//getting an existed engineer
+	public Engineer getEngineer(int id) {}
+	
+	public List<Engineer> search_by_name(String NAME_SURNAME){}*/
 	
 }
 

@@ -30,8 +30,7 @@ import java.sql.*;
 						   + " bodypart  TEXT UNIQUE NOT NULL,"
 						   + " price REAL NOT NULL,"
 						   + " date_creation DATE NOT NULL,"
-						   + " photo BLOB,"
-						   + " percentagefb REAL NOT NULL )";
+						   + " photo BLOB )";
 				stmt1.executeUpdate(sql1);
 				sql1 = "CREATE TABLE material "
 						   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"

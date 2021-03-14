@@ -80,7 +80,7 @@ public class JDBCManager implements DBManager {
 		try {
 			Statement st = c.createStatement();
 			String sql = "INSERT INTO material (name,price,product,amount) "
-					+ " VALUES ('m.getName()','m.getPrice()', 'm.getProducts()','m.getAmount')";
+					+ " VALUES ('"+m.getName()+"','"+m.getPrice()+"','"+m.getProducts()+"','"+m.getAmount()+"')'";
 			st.executeUpdate(sql);
 			st.close();
 		} catch (Exception e) {

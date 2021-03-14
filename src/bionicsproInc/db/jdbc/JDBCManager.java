@@ -1,11 +1,8 @@
 package bionicsproInc.db.jdbc;
 
-import java.io.*;
-import java.io.InputStreamReader;
 import java.sql.*;
 import bionicsproInc.db.ifaces.DBManager;
 import bionicsproInc.db.pojos.*;
-
 
 ;
 
@@ -75,14 +72,16 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
+
 	public void addProduct(Product p) {
 		try {
-			Statement st1=c.createStatement();
-			String sql="INSERT INTO product (name,bodypart,price,date_creation,photo) "
-					+" VALUES('"+p.getName()+"','"+p.getBodypart()+"','"+p.getPrice()+"','"+p.getDate_creation()+"','"+p.getPhoto()+"')'";
+			Statement st1 = c.createStatement();
+			String sql = "INSERT INTO product (name,bodypart,price,date_creation,photo) " + " VALUES('" + p.getName()
+					+ "','" + p.getBodypart() + "','" + p.getPrice() + "','" + p.getDate_creation() + "','"
+					+ p.getPhoto() + "')'";
 			st1.executeUpdate(sql);
 			st1.close();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -90,8 +89,8 @@ public class JDBCManager implements DBManager {
 	public void addMaterial(Material m) {
 		try {
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO material (name,price,product,amount) "
-					+ " VALUES ('"+m.getName()+"','"+m.getPrice()+"','"+m.getProducts()+"','"+m.getAmount()+"')'";
+			String sql = "INSERT INTO material (name,price,product,amount) " + " VALUES ('" + m.getName() + "','"
+					+ m.getPrice() + "','" + m.getProducts() + "','" + m.getAmount() + "')'";
 			st.executeUpdate(sql);
 			st.close();
 		} catch (Exception e) {
@@ -103,50 +102,28 @@ public class JDBCManager implements DBManager {
 	public void addCustomer(Customer cust) {
 		try {
 			Statement st = c.createStatement();
-			System.out.println("Please, input the customer info:");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			System.out.print("First name: ");
-			String first_name = reader.readLine();
-			System.out.print("Last name: ");
-			String last_name = reader.readLine();
-			System.out.print("Age: ");
-			String age = reader.readLine();
-			System.out.print("Gender (MALE/FEMALE): ");
-			String gender = reader.readLine();
-			System.out.print("Phone: ");
-			String phone = reader.readLine();
-			System.out.print("Email: ");
-			String email = reader.readLine();
-			System.out.print("Street: ");
-			String street = reader.readLine();
-			System.out.print("City: ");
-			String city = reader.readLine();
-			System.out.print("Postal code: ");
-			String postal_code = reader.readLine();
-			System.out.print("Order id: ");
-			String order_id = reader.readLine();
 			String sql = "INSERT INTO customer (first_name, last_name, age, gender, phone, email, street, city, postal_code, order_id) "
-					+ " VALUES ('" + first_name + "', '" + last_name + "','" + age + "','" + gender + "','" + phone
-					+ "', " + "'" + email + "','" + street + "','" + city + "','" + postal_code + "','" + order_id
-					+ "')";
+					+ " VALUES ('" + cust.getFirst_name() + "', '" + cust.getLast_name() + "','" + cust.getAge() + "','"
+					+ cust.getGender() + "','" + cust.getPhone() + "', " + "'" + cust.getEmail() + "','"
+					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "','"
+					+ cust.getOrder_id() + "')";
 			st.executeUpdate(sql);
 			st.close();
-			System.out.println("Customer info processed.");
-			System.out.println("Records inserted.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-	
 
 	public void addEngineer(Engineer eng) {
 		try {
-			
+
 			Statement stmt = c.createStatement();
 			String sql = " INSERT INTO people (Name_surname,contract_strating_date,contract_ending_date,current_service,salary,bonus,project_achieved,"
-					   + " experience_in_years,date_of_birth,products)"
-					   + ") VALUES ('" + eng.getName_surname() + "','" + eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','" + eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','" + eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" + eng.getProducts() + "')";
+					+ " experience_in_years,date_of_birth,products)" + ") VALUES ('" + eng.getName_surname() + "','"
+					+ eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','"
+					+ eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','"
+					+ eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" + eng.getProducts() + "')";
 			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (Exception e) {
@@ -164,7 +141,7 @@ public class JDBCManager implements DBManager {
 	@Override
 	public void addCharacteristic(Characteristic c) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -172,7 +149,5 @@ public class JDBCManager implements DBManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 }

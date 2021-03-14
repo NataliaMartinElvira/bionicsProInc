@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 import java.sql.*;
 import bionicsproInc.db.ifaces.DBManager;
 import bionicsproInc.db.pojos.*;
-
+import jobseeker.db.pojos.Person;
+import bionicsproInc.db.*
+;
 public class JDBCManager implements DBManager {
 	private Connection c;
 
@@ -124,13 +126,22 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
+	
 
-	/*
-	 * public void hireEngineer(Engineer eng) {}
-	 * 
-	 * //getting an existed engineer public Engineer getEngineer(int id) {}
-	 * 
-	 * public List<Engineer> search_by_name(String NAME_SURNAME){}
-	 */
+	public void addEngineer(Engineer eng) {
+		try {
+			
+			Statement stmt = c.createStatement();
+			String sql = " INSERT INTO people (Name_surname,contract_strating_date,contract_ending_date,current_service,salary,bonus,project_achieved,"
+					   + " experience_in_years,date_of_birth,products)"
+					   + ") VALUES ('" + eng.getName_surname() + "','" + eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','" + eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','" + eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" + eng.getProducts() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 }

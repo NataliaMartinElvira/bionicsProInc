@@ -1,12 +1,12 @@
 package bionicsproInc.db.jdbc;
 
-import java.io.BufferedReader;
+import java.io.*;
 import java.io.InputStreamReader;
 import java.sql.*;
 import bionicsproInc.db.ifaces.DBManager;
 import bionicsproInc.db.pojos.*;
-import jobseeker.db.pojos.Person;
-import bionicsproInc.db.*
+
+
 ;
 
 public class JDBCManager implements DBManager {
@@ -142,6 +142,24 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public Engineer getEngineer(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addCharacteristic(Characteristic c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Characteristic getCharacteristic(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

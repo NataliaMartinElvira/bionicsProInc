@@ -51,8 +51,8 @@ public class Customer implements Serializable {
 	public gender getGender() {
 		return Gender;
 	}
-	public void setGender(gender gender) {
-		Gender = gender;
+	public void setGender(String gender) {
+		Gender = bionicsproInc.db.pojos.gender.valueOf(gender);
 	}
 	public int getPhone() {
 		return phone;

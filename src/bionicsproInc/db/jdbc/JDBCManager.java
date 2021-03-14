@@ -75,6 +75,17 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
+	public void addProduct(Product p) {
+		try {
+			Statement st1=c.createStatement();
+			String sql="INSERT INTO product (name,bodypart,price,date_creation,photo) "
+					+" VALUES('"+p.getName()+"','"+p.getBodypart()+"','"+p.getPrice()+"','"+p.getDate_creation()+"','"+p.getPhoto()+"')'";
+			st1.executeUpdate(sql);
+			st1.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void addMaterial(Material m) {
 		try {

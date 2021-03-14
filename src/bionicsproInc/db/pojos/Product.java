@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-abstract class Product implements Serializable {
+public class Product implements Serializable {
 	/**
 	 * 
 	 */

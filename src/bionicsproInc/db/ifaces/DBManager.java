@@ -7,6 +7,7 @@ import bionicsproInc.db.pojos.*;
 public interface DBManager {
 	public void connect();
 	public void disconnect();
+	public void addProduct(Product p);
 	//Add new engineer
 		//public void hireEngineer(Engineer eng);
 		public void addEngineer(Engineer eng);

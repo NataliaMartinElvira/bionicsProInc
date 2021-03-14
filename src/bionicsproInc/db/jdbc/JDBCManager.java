@@ -8,6 +8,7 @@ import bionicsproInc.db.pojos.*;
 import jobseeker.db.pojos.Person;
 import bionicsproInc.db.*
 ;
+
 public class JDBCManager implements DBManager {
 	private Connection c;
 
@@ -143,5 +144,6 @@ public class JDBCManager implements DBManager {
 
 	}
 
+	
 
 }

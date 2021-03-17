@@ -89,8 +89,8 @@ public class JDBCManager implements DBManager {
 	public void addMaterial(Material m) {
 		try {
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO material (name,price,product,amount) " + " VALUES ('" + m.getName() + "','"
-					+ m.getPrice() + "','" + m.getProducts() + "','" + m.getAmount() + "')'";
+			String sql = "INSERT INTO material (name,price,amount) " + " VALUES ('" + m.getName() + "','"
+					+ m.getPrice() + "','" + m.getAmount() + "')'";
 			st.executeUpdate(sql);
 			st.close();
 		} catch (Exception e) {

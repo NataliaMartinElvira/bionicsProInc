@@ -55,6 +55,10 @@ public class JDBCManager implements DBManager {
 					+ " weight REAL NOT NULL," + " joint_numb INTEGER NOT NULL,"
 					+ " flexibility_scale INTEGER NOT NULL," + " id_char_prod INTEGER REFERENCE products(id)";
 			stmt1.executeUpdate(sql1);
+			sql1 = "CREATE TABLE order" + "order_id INTEGET PRIMARY KEY NOT NULL,"
+					+ "product_id INTEGER NOT NULL REFERENCE products(id)";
+			stmt1.executeUpdate(sql1);
+
 			stmt1.close();
 		} catch (SQLException e) {
 			if (!e.getMessage().contains("alredy exists")) {

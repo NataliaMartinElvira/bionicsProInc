@@ -17,22 +17,9 @@ public class Product implements Serializable {
 	private Date date_creation;
 	private byte[] photo;
 	private ArrayList <Material> mats;
-	private ArrayList <Characteristic> christ;
+	private ArrayList <Characteristic> characteristic;
 	private ArrayList <Customer> customers; 
 	private ArrayList <Engineer> engineer;
-	
-
-	public Product(int id, String name, String bodypart, Float price, Date date_creation, byte[] photo,
-			ArrayList<Material> mats) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.bodypart = bodypart;
-		this.price = price;
-		this.date_creation = date_creation;
-		this.photo = photo;
-		this.mats = mats;
-	}
 	
 	public int getId() {
 		return id;
@@ -76,13 +63,33 @@ public class Product implements Serializable {
 	public void setMats(ArrayList<Material> mats) {
 		this.mats = mats;
 	}
-	
+	public ArrayList<Characteristic> getCharacteristic() {
+		return characteristic;
+	}
+	public void setCharacteristic(ArrayList<Characteristic> characteristic) {
+		this.characteristic = characteristic;
+	}
+	public ArrayList<Customer> getCustomers() {
+		return customers;
+	}
+	public void setCustomers(ArrayList<Customer> customers) {
+		this.customers = customers;
+	}
+	public ArrayList<Engineer> getEngineer() {
+		return engineer;
+	}
+	public void setEngineer(ArrayList<Engineer> engineer) {
+		this.engineer = engineer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bodypart == null) ? 0 : bodypart.hashCode());
-		result = prime * result + ((christ == null) ? 0 : christ.hashCode());
+		result = prime * result + ((characteristic == null) ? 0 : characteristic.hashCode());
 		result = prime * result + ((customers == null) ? 0 : customers.hashCode());
 		result = prime * result + ((date_creation == null) ? 0 : date_creation.hashCode());
 		result = prime * result + ((engineer == null) ? 0 : engineer.hashCode());
@@ -93,7 +100,6 @@ public class Product implements Serializable {
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,10 +114,10 @@ public class Product implements Serializable {
 				return false;
 		} else if (!bodypart.equals(other.bodypart))
 			return false;
-		if (christ == null) {
-			if (other.christ != null)
+		if (characteristic == null) {
+			if (other.characteristic != null)
 				return false;
-		} else if (!christ.equals(other.christ))
+		} else if (!characteristic.equals(other.characteristic))
 			return false;
 		if (customers == null) {
 			if (other.customers != null)
@@ -149,14 +155,22 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-
-	public ArrayList <Engineer> getEngineer() {
-		return engineer;
-	}
-
-	public void setEngineer(ArrayList <Engineer> engineer) {
+	public Product(int id, String name, String bodypart, Float price, Date date_creation, byte[] photo,
+			ArrayList<Material> mats, ArrayList<Characteristic> characteristic, ArrayList<Customer> customers,
+			ArrayList<Engineer> engineer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.bodypart = bodypart;
+		this.price = price;
+		this.date_creation = date_creation;
+		this.photo = photo;
+		this.mats = mats;
+		this.characteristic = characteristic;
+		this.customers = customers;
 		this.engineer = engineer;
 	}
+	
 	
 	
 	

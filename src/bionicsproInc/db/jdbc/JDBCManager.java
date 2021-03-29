@@ -58,6 +58,10 @@ public class JDBCManager implements DBManager {
 			sql1 = "CREATE TABLE order" + "order_id INTEGET PRIMARY KEY NOT NULL,"
 					+ "product_id INTEGER NOT NULL REFERENCE products(id)";
 			stmt1.executeUpdate(sql1);
+			//now we create the table that references the N-N relationships
+			sql1= "CREATE TABLE products_materials " + " product_id INETEGER REFERENCE products(id),"
+					+ " material_id INTEGER REFERENCE materials(id) ";
+			stmt1.executeUpdate(sql1);
 
 			stmt1.close();
 		} catch (SQLException e) {
@@ -102,6 +106,26 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
+	public void addMatIntoProd(Material m) {
+		try {
+			Statement st=c.createStatement();
+			String sql= "INSERT INTO products_materials (material_id) " + " VALUES ('" + m.getId() + "')'";
+			st.executeUpdate(sql);
+			st.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void addProdIntoMat(Product p) {
+		try {
+			Statement st=c.createStatement();
+			String sql= "INSERT INTO products_materials (product_id) " + " VALUES ('" + p.getId() + "')'";
+			st.executeUpdate(sql);
+			st.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void addCustomer(Customer cust) {
 		try {
@@ -129,6 +153,7 @@ public class JDBCManager implements DBManager {
 					+ eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','"
 					+ eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','"
 					+ eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" + eng.getProducts() + "')";
+
 			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (Exception e) {

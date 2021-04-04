@@ -25,4 +25,8 @@ public interface DBManager {
 	public Characteristic getCharacteristic(int id);
 
 	public void addMaterial(Material m);
+	
+	public void addProdIntoMat(Product p);
+	
+	public void addMatIntoProd(Material m);
 }

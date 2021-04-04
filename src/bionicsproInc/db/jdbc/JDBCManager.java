@@ -148,27 +148,12 @@ public class JDBCManager implements DBManager {
 
 			Statement stmt = c.createStatement();
 			String sql = " INSERT INTO people (Name_surname,contract_strating_date,contract_ending_date,current_service,salary,bonus,project_achieved,"
-
-<<<<<<< HEAD
-					   + " experience_in_years,date_of_birth,products)"
-					   + ") VALUES ('" + eng.getName_surname() + "','" 
-					   + eng.getContract_strating_date() + "','" + eng.getContract_ending_date() 
-					   + "','" + eng.getCurrent_service() + "','" 
-					   + eng.getSalary() + "','" + eng.getProject_achieved() + "','" 
-					   + eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" 
-					   + eng.getProducts() + "')";
-		
-			           stmt.executeUpdate(sql);
-			           stmt.close();
-=======
 					+ " experience_in_years,date_of_birth,products)" + ") VALUES ('" + eng.getName_surname() + "','"
 					+ eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','"
 					+ eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','"
 					+ eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" + eng.getProducts() + "')";
-
 			stmt.executeUpdate(sql);
 			stmt.close();
->>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

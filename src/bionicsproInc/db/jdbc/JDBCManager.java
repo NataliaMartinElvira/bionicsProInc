@@ -65,6 +65,9 @@ public class JDBCManager implements DBManager {
 			sql1= "CREATE TABLE products_customers " + " product_id INTEGER REFERENCE products(id),"
 					+ " customer_id INTEGER REFERENCE customer(person_id) ";
 			stmt1.executeUpdate(sql1);
+			sql1 = "CREATE TABLE engineers_products " + "engineer_id INTEGER REFERENCE engineer(id),"
+			       +  " product_id INTEGER REFERENCE products(id) ";
+			stmt1.executeUpdate(sql1);
 
 			stmt1.close();
 		} catch (SQLException e) {

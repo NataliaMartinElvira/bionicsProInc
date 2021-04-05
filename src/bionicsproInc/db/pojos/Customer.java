@@ -12,7 +12,7 @@ public class Customer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8505884502597501683L;
-	private int person_id;
+	private int id;
 	private String first_name;
 	private String last_name;
 	private int age;
@@ -24,11 +24,11 @@ public class Customer implements Serializable {
 	private int postal_code;
 	private int order_id;
 	private ArrayList <Product> products;
-	public int getPerson_id() {
-		return person_id;
+	public int getId() {
+		return id;
 	}
-	public void setPerson_id(int person_id) {
-		this.person_id = person_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getFirst_name() {
 		return first_name;
@@ -107,7 +107,7 @@ public class Customer implements Serializable {
 		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
 		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
 		result = prime * result + order_id;
-		result = prime * result + person_id;
+		result = prime * result + id;
 		result = prime * result + phone;
 		result = prime * result + postal_code;
 		result = prime * result + ((products == null) ? 0 : products.hashCode());
@@ -149,7 +149,7 @@ public class Customer implements Serializable {
 			return false;
 		if (order_id != other.order_id)
 			return false;
-		if (person_id != other.person_id)
+		if (id != other.id)
 			return false;
 		if (phone != other.phone)
 			return false;

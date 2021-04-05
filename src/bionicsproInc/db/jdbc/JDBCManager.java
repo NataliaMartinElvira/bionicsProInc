@@ -62,6 +62,9 @@ public class JDBCManager implements DBManager {
 			sql1= "CREATE TABLE products_materials " + " product_id INETEGER REFERENCE products(id),"
 					+ " material_id INTEGER REFERENCE materials(id) ";
 			stmt1.executeUpdate(sql1);
+			sql1= "CREATE TABLE products_customers " + " product_id INETEGER REFERENCE products(id),"
+					+ " customer_id INTEGER REFERENCE customer(person_id) ";
+			stmt1.executeUpdate(sql1);
 
 			stmt1.close();
 		} catch (SQLException e) {
@@ -120,6 +123,27 @@ public class JDBCManager implements DBManager {
 		try {
 			Statement st=c.createStatement();
 			String sql= "INSERT INTO products_materials (product_id) " + " VALUES ('" + p.getId() + "')'";
+			st.executeUpdate(sql);
+			st.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addCustIntoProd(Customer cust) {
+		try {
+			Statement st=c.createStatement();
+			String sql= "INSERT INTO products_customers (customer_id) " + " VALUES ('" + cust.getId() + "')'";
+			st.executeUpdate(sql);
+			st.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void addProdIntoCust(Product p) {
+		try {
+			Statement st=c.createStatement();
+			String sql= "INSERT INTO products_customers (product_id) " + " VALUES ('" + p.getId() + "')'";
 			st.executeUpdate(sql);
 			st.close();
 		}catch (SQLException e) {

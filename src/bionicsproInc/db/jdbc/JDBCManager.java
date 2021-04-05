@@ -59,10 +59,10 @@ public class JDBCManager implements DBManager {
 					+ "product_id INTEGER NOT NULL REFERENCE products(id)";
 			stmt1.executeUpdate(sql1);
 			//now we create the table that references the N-N relationships
-			sql1= "CREATE TABLE products_materials " + " product_id INETEGER REFERENCE products(id),"
+			sql1= "CREATE TABLE products_materials " + " product_id INTEGER REFERENCE products(id),"
 					+ " material_id INTEGER REFERENCE materials(id) ";
 			stmt1.executeUpdate(sql1);
-			sql1= "CREATE TABLE products_customers " + " product_id INETEGER REFERENCE products(id),"
+			sql1= "CREATE TABLE products_customers " + " product_id INTEGER REFERENCE products(id),"
 					+ " customer_id INTEGER REFERENCE customer(person_id) ";
 			stmt1.executeUpdate(sql1);
 

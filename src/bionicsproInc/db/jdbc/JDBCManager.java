@@ -27,14 +27,15 @@ public class JDBCManager implements DBManager {
 	}
 
 	private void createTables() {
+		
 		Statement stmt1;
 		try {
 			stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE products " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL, "
+		String sql1 = "CREATE TABLE products " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL, "
 					+ " bodypart  TEXT UNIQUE NOT NULL," + " price REAL NOT NULL," + " date_creation DATE NOT NULL,"
 					+ " photo BLOB )";
-			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE material " + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+	    	stmt1.executeUpdate(sql1); 
+			sql1 = "CREATE TABLE material " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name     TEXT     NOT NULL UNIQUE, " + " price REAL NOT NULL,"
 					+ " product_id INTEGER REFERENCE products(id)," + " amount   INTEGER	 NOT NULL)";
 			stmt1.executeUpdate(sql1);
@@ -48,12 +49,11 @@ public class JDBCManager implements DBManager {
 					+ " Name_surname     TEXT     NOT NULL UNIQUE, " + " contract_starting_date DATE NOT NULL UNIQUE,"
 					+ " contract_ending_date DATE NOT NULL," + " current_service TEXT NOT NULL,"
 					+ " salary REAL NOT NULL," + " bonus REAL NOT NULL," + " project_achieved INTEGER NOT NULL,"
-					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL,"
-					+ " id_eng_prod INTEGER REFERENCE products(id)";
+					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL)";
 			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE chatacteristics " + " length REAL NOT NULL," + " width REAL NOT NULL,"
+			sql1 = "CREATE TABLE chatacteristics " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " length REAL NOT NULL," + " width REAL NOT NULL,"
 					+ " weight REAL NOT NULL," + " joint_numb INTEGER NOT NULL,"
-					+ " flexibility_scale INTEGER NOT NULL," + " id_char_prod INTEGER REFERENCE products(id)";
+					+ " flexibility_scale INTEGER NOT NULL," + " id_char_prod INTEGER REFERENCE products(id))";
 			stmt1.executeUpdate(sql1);
 			sql1 = "CREATE TABLE order" + "order_id INTEGET PRIMARY KEY NOT NULL,"
 					+ "product_id INTEGER NOT NULL REFERENCE products(id)";
@@ -66,8 +66,12 @@ public class JDBCManager implements DBManager {
 					+ " customer_id INTEGER REFERENCE customer(person_id) ";
 			stmt1.executeUpdate(sql1);
 			sql1 = "CREATE TABLE engineers_products " + "engineer_id INTEGER REFERENCE engineer(id),"
-			       +  " product_id INTEGER REFERENCE products(id) ";
+			        +  " product_id INTEGER REFERENCE products(id) ";
 			stmt1.executeUpdate(sql1);
+			sql1= "CREATE TABLE characteristics_product" + "characteristics_id INTEGER REFERENCE products(id),"
+			        + " products_id INTEGER REFERENCE products(id) ";
+					
+			stmt1.execute(sql1);
 
 			stmt1.close();
 		} catch (SQLException e) {

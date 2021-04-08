@@ -28,52 +28,70 @@ public class JDBCManager implements DBManager {
 
 	private void createTables() {
 		
-		Statement stmt1;
+		
 		try {
-			stmt1 = c.createStatement();
+		Statement	stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE products " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL, "
 					+ " bodypart  TEXT UNIQUE NOT NULL," + " price REAL NOT NULL," + " date_creation DATE NOT NULL,"
 					+ " photo BLOB )";
 	    	stmt1.executeUpdate(sql1); 
-			sql1 = "CREATE TABLE material " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
+	    	stmt1.close(); 			
+	    	Statement stmt2 = c.createStatement();
+	   String	sql2 = "CREATE TABLE material " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name     TEXT     NOT NULL UNIQUE, " + " price REAL NOT NULL,"
-					+ " product_id INTEGER REFERENCE products(id)," + " amount   INTEGER	 NOT NULL)";
-			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE customer " + "(person_id INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					+ " amount   INTEGER	 NOT NULL)";
+			stmt2.executeUpdate(sql2);
+			stmt2.close(); 
+			Statement stmt3 = c.createStatement(); 
+		String	sql3 = "CREATE TABLE customer " + "(person_id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " first_name     TEXT     NOT NULL, " + " last_name   TEXT  	NOT NULL, "
-					+ " age INTEGER NOT NULL," + " gender TEXT CHECK(gender = 'Male' OR gender = 'Female')"
-					+ " phone INTEGER NOT NULL" + " email TEXT NOT NULL" + " street TEXT NOT NULL"
-					+ " city TEXT NOT NULL" + " postal_code INTEGER NOT NULL" + " order_id INTEGER)";
-			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE engineer " + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					+ " age INTEGER NOT NULL," + " gender TEXT CHECK(gender = 'Male' OR gender = 'Female'),"
+					+ " phone INTEGER NOT NULL," + " email TEXT NOT NULL," + " street TEXT NOT NULL,"
+					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL," + " order_id INTEGER)";
+			stmt3.executeUpdate(sql3);
+			stmt3.close();
+			Statement stmt4 = c.createStatement();
+		String 	sql4 = "CREATE TABLE engineer " + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " Name_surname     TEXT     NOT NULL UNIQUE, " + " contract_starting_date DATE NOT NULL UNIQUE,"
 					+ " contract_ending_date DATE NOT NULL," + " current_service TEXT NOT NULL,"
 					+ " salary REAL NOT NULL," + " bonus REAL NOT NULL," + " project_achieved INTEGER NOT NULL,"
 					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL)";
-			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE chatacteristics " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " length REAL NOT NULL," + " width REAL NOT NULL,"
+			stmt4.executeUpdate(sql4);
+			stmt4.close();
+			Statement stmt5 = c.createStatement();
+		String	sql5 = "CREATE TABLE characteristics " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " length REAL NOT NULL," + " width REAL NOT NULL,"
 					+ " weight REAL NOT NULL," + " joint_numb INTEGER NOT NULL,"
-					+ " flexibility_scale INTEGER NOT NULL," + " id_char_prod INTEGER REFERENCE products(id))";
-			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE order" + "order_id INTEGET PRIMARY KEY NOT NULL,"
-					+ "product_id INTEGER NOT NULL REFERENCE products(id)";
-			stmt1.executeUpdate(sql1);
+					+ " flexibility_scale INTEGER NOT NULL)";
+			stmt5.executeUpdate(sql5);
+			stmt5.close(); 
+			Statement stmt6 = c.createStatement(); 
+		String	sql6 = "CREATE TABLE order " + "(order_id INTEGER PRIMARY KEY NOT NULL,"
+					+ " product_id INTEGER NOT NULL REFERENCE products(id))";
+			stmt6.executeUpdate(sql6);
+			stmt6.close(); 
 			//now we create the table that references the N-N relationships
-			sql1= "CREATE TABLE products_materials " + " product_id INTEGER REFERENCE products(id),"
-					+ " material_id INTEGER REFERENCE materials(id) ";
-			stmt1.executeUpdate(sql1);
-			sql1= "CREATE TABLE products_customers " + " product_id INTEGER REFERENCE products(id),"
-					+ " customer_id INTEGER REFERENCE customer(person_id) ";
-			stmt1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE engineers_products " + "engineer_id INTEGER REFERENCE engineer(id),"
-			        +  " product_id INTEGER REFERENCE products(id) ";
-			stmt1.executeUpdate(sql1);
-			sql1= "CREATE TABLE characteristics_product" + "characteristics_id INTEGER REFERENCE products(id),"
-			        + " products_id INTEGER REFERENCE products(id) ";
+			Statement stmt7 = c.createStatement();
+		String	sql7= "CREATE TABLE products_materials " + "(product_id  INTEGER REFERENCES products(id),"
+					+ " material_id INTEGER REFERENCES material(id))";
+			stmt7.executeUpdate(sql7);
+			stmt7.close();      
+			Statement stmt8 = c.createStatement();
+		String	sql8= "CREATE TABLE products_customers " + "(product_id INTEGER REFERENCES products(id),"
+					+ " customer_id INTEGER REFERENCES customer(person_id))";
+			stmt8.executeUpdate(sql8);
+			stmt8.close();
+			Statement stmt9 = c.createStatement();
+		String	sql9 = "CREATE TABLE engineers_products " + "(engineer_id INTEGER REFERENCES engineer(id),"
+			        +  " product_id INTEGER REFERENCES products(id))";
+			stmt9.executeUpdate(sql9);
+			stmt9.close();
+			Statement stmt10 = c.createStatement();
+		String	sql10= "CREATE TABLE characteristics_product" + "(characteristics_id INTEGER REFERENCES products(id),"
+			        + " products_id INTEGER REFERENCES products(id))";
 					
-			stmt1.execute(sql1);
+			stmt10.execute(sql10);
 
-			stmt1.close();
+			stmt10.close();
 		} catch (SQLException e) {
 			if (!e.getMessage().contains("alredy exists")) {
 				e.printStackTrace();

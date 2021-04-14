@@ -1,6 +1,6 @@
 package bionicsproInc.db.ifaces;
 
-//import java.util.List;
+import java.util.List;
 
 import bionicsproInc.db.pojos.*;
 
@@ -29,4 +29,6 @@ public interface DBManager {
 	public void addProdIntoMat(Product p);
 	
 	public void addMatIntoProd(Material m);
+	
+	public List<Product> SearchProductByBody(String bodypart);
 }

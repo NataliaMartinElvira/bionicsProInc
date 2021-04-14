@@ -1,6 +1,9 @@
 package bionicsproInc.db.jdbc;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import bionicsproInc.db.ifaces.DBManager;
 import bionicsproInc.db.pojos.*;
 
@@ -225,6 +228,28 @@ public class JDBCManager implements DBManager {
 	public Characteristic getCharacteristic(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<Product> SearchProductByBody(String bodypart){
+		List <Product> products= new ArrayList<Product> ();
+		try {
+			String sql= "SELECT name FROM products WHERE bodypart LIKE ?";
+			PreparedStatement stm= c.prepareStatement(sql);
+			stm.setString(1, "%"+bodypart+"%");
+			ResultSet rs=stm.executeQuery();
+			while(rs.next()) {
+				int id=rs.getInt("id");
+				String productname= rs.getString("name");
+				Product p= new Product(id,productname);
+				products.add(p);
+			}
+			rs.close();
+			stm.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return products;
 	}
 
 }

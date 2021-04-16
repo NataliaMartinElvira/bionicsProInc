@@ -32,4 +32,5 @@ public interface DBManager {
 	
 	public List<Product> SearchProductByBody(String bodypart);
 	
+	public void removeProd(int prodId);
 }

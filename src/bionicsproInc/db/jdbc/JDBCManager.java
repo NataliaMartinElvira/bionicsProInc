@@ -269,5 +269,17 @@ public class JDBCManager implements DBManager {
 		}
 		return bodyPart;
 	}
-
+	
+	@Override 
+	public void removeProd(int prodId) {
+		try {
+			String sql ="DELETE FROM Product WHERE id = ? ";
+			PreparedStatement stmt = c.prepareStatement (sql);
+			stmt.setInt(1, prodId);
+			stmt.executeUpdate();
+			stmt.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

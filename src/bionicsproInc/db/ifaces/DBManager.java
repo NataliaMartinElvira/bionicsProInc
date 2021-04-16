@@ -32,4 +32,6 @@ public interface DBManager {
 	
 	public List<Product> SearchProductByBody(String bodypart);
 	
+	public List<String> viewBodyparts();
+	
 }

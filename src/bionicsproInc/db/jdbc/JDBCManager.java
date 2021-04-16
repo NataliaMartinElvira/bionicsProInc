@@ -269,5 +269,6 @@ public class JDBCManager implements DBManager {
 		}
 		return bodyPart;
 	}
+	
 
 }

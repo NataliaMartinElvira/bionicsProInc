@@ -31,4 +31,5 @@ public interface DBManager {
 	public void addMatIntoProd(Material m);
 	
 	public List<Product> SearchProductByBody(String bodypart);
+	
 }

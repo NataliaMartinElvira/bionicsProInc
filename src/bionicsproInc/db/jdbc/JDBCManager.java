@@ -251,5 +251,12 @@ public class JDBCManager implements DBManager {
 		}
 		return products;
 	}
+	
+	@Override
+	public void deleteProduct(int idproduct) {
+		try {
+			String sql=
+		}
+	}
 
 }

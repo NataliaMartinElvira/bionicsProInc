@@ -251,5 +251,22 @@ public class JDBCManager implements DBManager {
 		}
 		return products;
 	}
+	public List<String> viewBodyparts(){
+		List<String> bodyPart= new ArrayList<String>();
+		try {
+			String sql= " SELECT DISTINCT bodypart FROM product ";
+			PreparedStatement stm= c.prepareStatement(sql);
+			ResultSet rs=stm.executeQuery();
+			while(rs.next()) {
+				String part=rs.getString("bodypart");
+				bodyPart.add(part);
+			}
+			rs.close();
+			stm.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return bodyPart;
+	}
 
 }

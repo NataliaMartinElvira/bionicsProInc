@@ -26,11 +26,7 @@ public class Engineer implements Serializable  {
 		this.id = id;
 		this.bonus = bonus;
 	}
-   public Engineer(int id, int pa) {
-	   super();
-	   this.id=id;
-	   this.project_achieved=pa;
-   }
+ 
 public int getId() {
 	return id;
 }

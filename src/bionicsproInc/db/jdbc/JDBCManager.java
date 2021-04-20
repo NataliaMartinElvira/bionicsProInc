@@ -58,7 +58,8 @@ public class JDBCManager implements DBManager {
 					+ " Name_surname     TEXT     NOT NULL UNIQUE, " + " contract_starting_date DATE NOT NULL UNIQUE,"
 					+ " contract_ending_date DATE NOT NULL," + " current_service TEXT NOT NULL,"
 					+ " salary REAL NOT NULL," + " bonus REAL NOT NULL," + " project_achieved INTEGER NOT NULL,"
-					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL)";
+					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL,"
+					+ " product_id INETEGR NOT NULL REFERENCES products(id)";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
 			Statement stmt5 = c.createStatement();
@@ -347,21 +348,24 @@ public class JDBCManager implements DBManager {
 		}
 		return Ids;
 	}
-	public Engineer viewProjectAchieved(int engId){
+	public List<String> viewProjectAchieved(int engId){
+		List<String> prodname= new ArrayList<String>();
 		try {
-			String sql="SELECT id,project_achieved FROM Engineer WHERE id= ?";
+			String sql="SELECT e.id, p.name FROM Engineer as e JOIN product as p ON p.id=e.product_id WHERE id= ?";
 			PreparedStatement stmt= c.prepareStatement(sql);
 			stmt.setInt(1, engId);
 			ResultSet rs=stmt.executeQuery();
 			if (rs.next()) {
-				return new Engineer(engId, rs.getInt("project_achieved"));
+				String pname = rs.getString("name");
+				prodname.add(pname);
 			}
 			rs.close();
 			stmt.close();		
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return prodname;
+	
 	}
 }
 

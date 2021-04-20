@@ -40,6 +40,6 @@ public interface DBManager {
 	
 	public List<Integer> viewOtherOrders(int id);
 	
-	public Engineer viewProjectAchieved(int engId);
+	public List<String> viewProjectAchieved(int engId);
 
 }

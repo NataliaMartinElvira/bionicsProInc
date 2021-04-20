@@ -37,5 +37,7 @@ public interface DBManager {
 	public void removeProd(int prodId);
 	
 	public Engineer ViewBonus (int engId);
+	
+	public List<Integer> viewOtherOrders(int id);
 
 }

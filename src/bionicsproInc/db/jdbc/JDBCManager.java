@@ -46,7 +46,7 @@ public class JDBCManager implements DBManager {
 			stmt2.executeUpdate(sql2);
 			stmt2.close(); 
 			Statement stmt3 = c.createStatement(); 
-		String	sql3 = "CREATE TABLE customer " + "(person_id INTEGER  PRIMARY KEY AUTOINCREMENT,"
+		String	sql3 = "CREATE TABLE customer " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " first_name     TEXT     NOT NULL, " + " last_name   TEXT  	NOT NULL, "
 					+ " age INTEGER NOT NULL," + " gender TEXT CHECK(gender = 'Male' OR gender = 'Female'),"
 					+ " phone INTEGER NOT NULL," + " email TEXT NOT NULL," + " street TEXT NOT NULL,"
@@ -93,10 +93,14 @@ public class JDBCManager implements DBManager {
 			        + " products_id INTEGER REFERENCES products(id))";
 					
 			stmt10.execute(sql10);
-
 			stmt10.close();
+		Statement stmt11=c.createStatement();
+		String sql11= " CREAT TABLE customer_order " + "(customer_id INTEGER REFERENCES customer(id), "
+					+ " order_id INTEGER REFERENCES order(order_id))";
+			stmt11.executeUpdate(sql11);
+			stmt11.close();
 		} catch (SQLException e) {
-			if (!e.getMessage().contains("alredy exists")) {
+			if (!e.getMessage().contains("already exists")) {
 				e.printStackTrace();
 			}
 		}
@@ -115,7 +119,7 @@ public class JDBCManager implements DBManager {
 	public void addProduct(Product p) {
 		try {
 			Statement st1 = c.createStatement();
-			String sql = "INSERT INTO product (name,bodypart,price,date_creation,photo) " + " VALUES('" + p.getName()
+			String sql = "INSERT INTO products (name,bodypart,price,date_creation,photo) " + " VALUES('" + p.getName()
 					+ "','" + p.getBodypart() + "','" + p.getPrice() + "','" + p.getDate_creation() + "','"
 					+ p.getPhoto() + "')'";
 			st1.executeUpdate(sql);
@@ -234,7 +238,7 @@ public class JDBCManager implements DBManager {
 	public List<String> viewBodyparts(){
 		List<String> bodyPart= new ArrayList<String>();
 		try {
-			String sql= " SELECT DISTINCT bodypart FROM product ";
+			String sql= " SELECT DISTINCT bodypart FROM products ";
 			PreparedStatement stm= c.prepareStatement(sql);
 			ResultSet rs=stm.executeQuery();
 			while(rs.next()) {
@@ -274,7 +278,7 @@ public class JDBCManager implements DBManager {
 	@Override 
 	public void removeProd(int prodId) {
 		try {
-			String sql ="DELETE FROM Product WHERE id = ? ";
+			String sql ="DELETE FROM products WHERE id = ? ";
 			PreparedStatement stmt = c.prepareStatement (sql);
 			stmt.setInt(1, prodId);
 			stmt.executeUpdate();
@@ -300,7 +304,48 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 		return null;
+	}
 		
+	Order temporaryOrder=new Order();
+	public void AddToOrder(Product product) {
+		//add that product to the order
+	}
+	public List<String> viewCart(Order o){
+		List<String> p_names= new ArrayList<String>();
+		try {
+			String sql= " SELECT p.name FROM products AS p JOIN order AS or ON or.product_id=p.id WHERE or.order_id= ? ";
+			PreparedStatement stmt= c.prepareStatement(sql);
+			stmt.setInt(1, o.getOrder_id());
+			ResultSet rs= stmt.executeQuery();
+			while(rs.next()) {
+				String productName= rs.getString("name");
+				p_names.add(productName);
+			}
+			rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return p_names;
+	}
+	@Override
+	public List<Integer> viewOtherOrders(int id){
+		List<Integer> Ids= new ArrayList<Integer>();
+		try {
+			String sql= " SELECT c.order_id FROM costumer_order AS c WHERE c.costumer_id= ? ";
+			PreparedStatement stmt= c.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs= stmt.executeQuery();
+			while(rs.next()) {
+				int ids= rs.getInt(id);
+				Ids.add(ids);
+			}
+			rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return Ids;
 	}
 }
 

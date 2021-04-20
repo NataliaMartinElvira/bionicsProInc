@@ -347,5 +347,22 @@ public class JDBCManager implements DBManager {
 		}
 		return Ids;
 	}
+	public Engineer viewProjectAchieved(int engId){
+		try {
+			String sql="SELECT id,project_achieved FROM Engineer WHERE id= ?";
+			PreparedStatement stmt= c.prepareStatement(sql);
+			stmt.setInt(1, engId);
+			ResultSet rs=stmt.executeQuery();
+			if (rs.next()) {
+				return new Engineer(engId, rs.getInt("project_achieved"));
+			}
+			rs.close();
+			stmt.close();		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
+
 

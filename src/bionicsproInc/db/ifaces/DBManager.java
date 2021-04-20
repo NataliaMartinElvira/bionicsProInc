@@ -35,5 +35,7 @@ public interface DBManager {
 	public List<String> viewBodyparts();
 	
 	public void removeProd(int prodId);
+	
+	public Engineer ViewBonus (int engId);
 
 }

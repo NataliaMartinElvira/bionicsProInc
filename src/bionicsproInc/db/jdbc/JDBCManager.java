@@ -283,5 +283,24 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public Engineer ViewBonus (int engId) {
+		try {
+			String sql="SELECT id,bonus FROM Engineer WHERE id= ?";
+			PreparedStatement stmt= c.prepareStatement(sql);
+			stmt.setInt(1, engId);
+			ResultSet rs=stmt.executeQuery();
+			if (rs.next()) {
+				return new Engineer(engId, rs.getFloat("bonus"));
+			}
+			rs.close();
+			stmt.close();		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 }
 

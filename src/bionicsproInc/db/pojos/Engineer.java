@@ -20,8 +20,13 @@ public class Engineer implements Serializable  {
    	private int experience_in_years; 
    	private Date date_of_birth; 
    	private ArrayList<Product> products; 
-   
-   public int getId() {
+   	
+   public Engineer(int id, float bonus) {
+		super();
+		this.id = id;
+		this.bonus = bonus;
+	}
+public int getId() {
 	return id;
 }
 public void setId(int id) {

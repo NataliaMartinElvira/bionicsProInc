@@ -31,6 +31,14 @@ public class Order implements Serializable {
 	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
+	public void removeProduct(int id) {
+		for(int i=1;i<=products.size()-1;i++) {
+			int pId=products.get(i).getId();
+			if(pId==id) {
+				products.remove(i);
+			}
+		}
+	}
 
 	@Override
 	public int hashCode() {

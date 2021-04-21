@@ -365,7 +365,22 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 		return prodname;
-	
+	}
+	public void deleteProdFromCart(String name, Order o) {
+		try {
+			String sql ="SELECT id FROM products WHERE name = ? ";
+			PreparedStatement stmt= c.prepareStatement(sql);
+			stmt.setString(1,"%"+name+"%");
+			ResultSet rs= stmt.executeQuery();
+			while(rs.next()) {
+				int id= rs.getInt("product_id");
+				o.removeProduct(id);
+			}
+			rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

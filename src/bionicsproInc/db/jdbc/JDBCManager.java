@@ -382,20 +382,20 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
-	/*public List<String> viewCharacteristicsFromProduct(int prodId){
+	public List<String> viewCharacteristicsFromProduct(int prodId){
 		List <String> characteristics= new ArrayList<String> ();
 		try {
 			String sql= "SELECT c.name, p.id FROM characteristics_product as cp JOIN characteristics as c "
 			+ "ON cp.characteristic_id = c.id JOIN products as p ON cp.products_id = p.id WHERE p.id = ?";
-			PreparedStatement stm= c.prepareStatement(sql);
+			PreparedStatement stmt= c.prepareStatement(sql);
 			stmt.setInt(1, prodId);
-			ResultSet rs=stm.executeQuery();
+			ResultSet rs=stmt.executeQuery();
 			while(rs.next()) {
 				String name= rs.getString("name");
 				characteristics.add(name);
 			}
 			rs.close();
-			stm.close();
+			stmt.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -407,24 +407,21 @@ public class JDBCManager implements DBManager {
 		try {
 			String sql= "SELECT m.name, p.id FROM products_materials as pm JOIN materials as m "
 			+ "ON pm.material_id = m.id JOIN products as p ON pm.products_id = p.id WHERE p.id = ?";
-			PreparedStatement stm= c.prepareStatement(sql);
+			PreparedStatement stmt= c.prepareStatement(sql);
 			stmt.setInt(1, prodId);
-			ResultSet rs=stm.executeQuery();
+			ResultSet rs=stmt.executeQuery();
 			while(rs.next()) {
 				String name= rs.getString("name");
 				materials.add(name);
 			}
 			rs.close();
-			stm.close();
+			stmt.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return materials;
 	}
 		
-			
-
-		· List of products from the order (la que haya seleccionado el user)
 		
 	public List<String> viewProductsFromOrder(int orderId){
 		List<String> prodname= new ArrayList<String>();
@@ -443,7 +440,8 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 		return prodname;
-	 */
+	 
+	}
 }
 
 

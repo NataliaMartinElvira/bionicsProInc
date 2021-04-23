@@ -17,90 +17,108 @@ public class Product implements Serializable {
 	private Float price;
 	private Date date_creation;
 	private byte[] photo;
-	private ArrayList <Material> mats;
-	private ArrayList <Characteristic> characteristic;
-	private ArrayList <Customer> customers; 
-	private ArrayList <Engineer> engineer;
+	private ArrayList<Material> mats;
+	private ArrayList<Characteristic> characteristic;
+	private ArrayList<Customer> customers;
+	private ArrayList<Engineer> engineer;
 	private List<Product> products;
-	
+
 	public Product() {
 		super();
 		// Don't forget to initialize every list
 		this.products = new ArrayList<Product>();
 	}
-	
-	
+
 	public Product(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getBodypart() {
 		return bodypart;
 	}
+
 	public void setBodypart(String bodypart) {
 		this.bodypart = bodypart;
 	}
+
 	public Float getPrice() {
 		return price;
 	}
+
 	public void setPrice(Float price) {
 		this.price = price;
 	}
+
 	public Date getDate_creation() {
 		return date_creation;
 	}
+
 	public void setDate_creation(Date date_creation) {
 		this.date_creation = date_creation;
 	}
+
 	public byte[] getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
 	public ArrayList<Material> getMats() {
 		return mats;
 	}
+
 	public void setMats(ArrayList<Material> mats) {
 		this.mats = mats;
 	}
+
 	public ArrayList<Characteristic> getCharacteristic() {
 		return characteristic;
 	}
+
 	public void setCharacteristic(ArrayList<Characteristic> characteristic) {
 		this.characteristic = characteristic;
 	}
+
 	public ArrayList<Customer> getCustomers() {
 		return customers;
 	}
+
 	public void setCustomers(ArrayList<Customer> customers) {
 		this.customers = customers;
 	}
+
 	public ArrayList<Engineer> getEngineer() {
 		return engineer;
 	}
+
 	public void setEngineer(ArrayList<Engineer> engineer) {
 		this.engineer = engineer;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -109,8 +127,6 @@ public class Product implements Serializable {
 		this.products = products;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -198,19 +214,15 @@ public class Product implements Serializable {
 		this.characteristic = characteristic;
 		this.customers = customers;
 		this.engineer = engineer;
-		this.products= new ArrayList<Product>();
+		this.products = new ArrayList<Product>();
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", bodypart=" + bodypart + ", price=" + price
 				+ ", date_creation=" + date_creation + ", photo=" + Arrays.toString(photo) + ", mats=" + mats
-				+ ", characteristic=" + characteristic + ", customers=" + customers + ", engineer=" + engineer + ", products="+products+ "]";
+				+ ", characteristic=" + characteristic + ", customers=" + customers + ", engineer=" + engineer
+				+ ", products=" + products + "]";
 	}
-	
-	
-	
-	
-	
-	
+
 }

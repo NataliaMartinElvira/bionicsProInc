@@ -11,9 +11,9 @@ public class Material implements Serializable {
 	private int id;
 	private String name;
 	private float price;
-	private ArrayList <Product> products;
+	private ArrayList<Product> products;
 	private int amount;
-	
+
 	public Material(int id, String name, float price, ArrayList<Product> products, int amount) {
 		super();
 		this.id = id;
@@ -22,37 +22,55 @@ public class Material implements Serializable {
 		this.products = products;
 		this.amount = amount;
 	}
+
+	public Material(int id, String name, float price, int amount) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.amount = amount;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public float getPrice() {
 		return price;
 	}
+
 	public void setPrice(float price) {
 		this.price = price;
 	}
+
 	public ArrayList<Product> getProducts() {
 		return products;
 	}
+
 	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
+
 	public int getAmount() {
 		return amount;
 	}
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,6 +82,7 @@ public class Material implements Serializable {
 		result = prime * result + ((products == null) ? 0 : products.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -91,8 +110,5 @@ public class Material implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

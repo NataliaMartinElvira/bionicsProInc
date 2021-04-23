@@ -402,17 +402,16 @@ public class JDBCManager implements DBManager {
 		return characteristics;
 	}
 	
-	public List<String> viewMaterialsFromProduct(int prodId){
-		List <String> materials= new ArrayList<String> ();
+	public List<Material> viewMaterialsFromProduct(int prodId){
+		List <Material> materials= new ArrayList<Material> ();
 		try {
-			String sql= "SELECT m.name, p.id FROM products_materials as pm JOIN materials as m "
+			String sql= "SELECT m.*, p.id FROM products_materials as pm JOIN materials as m "
 			+ "ON pm.material_id = m.id JOIN products as p ON pm.products_id = p.id WHERE p.id = ?";
 			PreparedStatement stmt= c.prepareStatement(sql);
 			stmt.setInt(1, prodId);
 			ResultSet rs=stmt.executeQuery();
 			while(rs.next()) {
-				String name= rs.getString("name");
-				materials.add(name);
+				
 			}
 			rs.close();
 			stmt.close();

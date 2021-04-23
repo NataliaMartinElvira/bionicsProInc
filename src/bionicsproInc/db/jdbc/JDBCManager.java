@@ -48,7 +48,7 @@ public class JDBCManager implements DBManager {
 					+ " first_name     TEXT     NOT NULL, " + " last_name   TEXT  	NOT NULL, "
 					+ " age INTEGER NOT NULL," + " gender TEXT CHECK(gender = 'Male' OR gender = 'Female'),"
 					+ " phone INTEGER NOT NULL," + " email TEXT NOT NULL," + " street TEXT NOT NULL,"
-					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL," + " order_id INTEGER)";
+					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 			Statement stmt4 = c.createStatement();
@@ -189,11 +189,10 @@ public class JDBCManager implements DBManager {
 	public void addCustomer(Customer cust) {
 		try {
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO customer (first_name, last_name, age, gender, phone, email, street, city, postal_code, order_id) "
+			String sql = "INSERT INTO customer (first_name, last_name, age, gender, phone, email, street, city, postal_code) "
 					+ " VALUES ('" + cust.getFirst_name() + "', '" + cust.getLast_name() + "','" + cust.getAge() + "','"
 					+ cust.getGender() + "','" + cust.getPhone() + "', " + "'" + cust.getEmail() + "','"
-					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "','"
-					+ cust.getOrder_id() + "')";
+					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "')";
 			st.executeUpdate(sql);
 			st.close();
 		} catch (Exception e) {

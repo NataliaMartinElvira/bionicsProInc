@@ -1,9 +1,42 @@
 package bionicsproInc.ui;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import bionicsproInc.db.ifaces.DBManager;
+import bionicsproInc.db.jdbc.JDBCManager;
+
 public class Menu {
 
-}
+	private static DBManager dbman = new JDBCManager();
+	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+	public static void main(String[] args) throws Exception {
+		dbman.connect();
+		do {
+			System.out.println("Choose an option:");
+			System.out.println("1. TODO");
+			System.out.println("2. TODO");
+			System.out.println("0. Exit");
+			int choice = Integer.parseInt(reader.readLine());
+			switch (choice) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 0:
+				dbman.disconnect();
+				System.exit(0);
+				break;
+			default:
+				break;
+			}
+		} while (true);
+
+	}
+}
 
 /*
  * private static void addCustomer() throws Exception {

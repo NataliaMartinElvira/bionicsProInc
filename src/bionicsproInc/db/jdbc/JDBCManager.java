@@ -311,16 +311,35 @@ public class JDBCManager implements DBManager {
 
 	Order temporaryOrder = new Order();
 
-	public void AddToOrder(Product product, Order order) {
-		
-		int prodId = product.getId();
-		int orderId = order.getOrder_id();
+	public void addToOrder(Product product, Order order) {
+
 		try {
-			Statement 
-			String sql =  "INSERT INTO  Order (order_id,product_id) VALUES ('orderId','prodId') ";
-			
+			Statement stmt = c.createStatement();
+			String sql = "INSERT INTO order (order_id,product_id) " + " VALUES ('" + order.getOrder_id() + "','"
+					+ product.getId() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		order.addProduct(product);
+
 	}
+	
+	/*public void removeFromOrder(Product product, Order order) {
+
+		try {
+			Statement stmt = c.createStatement();
+			String sql = "DELETE product_id, order_id FROM order WHERE order_id = ? AND product_id = ?" + " VALUES ('" + order.getOrder_id() + "','"
+					+ product.getId() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		order.removeProduct(product.getId());
+
+	}*/
 
 	public List<String> viewCart(Order o) {
 		List<String> p_names = new ArrayList<String>();

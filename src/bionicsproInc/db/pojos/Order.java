@@ -31,11 +31,16 @@ public class Order implements Serializable {
 	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
+	
+	public void addProduct(Product product) {
+		this.products.add(product);
+	}
+	
 	public void removeProduct(int id) {
-		for(int i=1;i<=products.size()-1;i++) {
-			int pId=products.get(i).getId();
+		for(int i=1;i<=this.products.size()-1;i++) {
+			int pId=this.products.get(i).getId();
 			if(pId==id) {
-				products.remove(i);
+				this.products.remove(i);
 			}
 		}
 	}

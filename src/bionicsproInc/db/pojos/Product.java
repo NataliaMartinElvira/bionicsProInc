@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Product implements Serializable {
 	/**
@@ -21,14 +20,6 @@ public class Product implements Serializable {
 	private ArrayList<Characteristic> characteristic;
 	private ArrayList<Customer> customers;
 	private ArrayList<Engineer> engineer;
-
-	
-
-	public Product() {
-		super();
-		// Don't forget to initialize every list
-		this.products = new ArrayList<Product>();
-	}
 
 	public Product(int id, String name) {
 		super();
@@ -120,14 +111,6 @@ public class Product implements Serializable {
 		return serialVersionUID;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -215,15 +198,14 @@ public class Product implements Serializable {
 		this.characteristic = characteristic;
 		this.customers = customers;
 		this.engineer = engineer;
-		this.products = new ArrayList<Product>();
+
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", bodypart=" + bodypart + ", price=" + price
 				+ ", date_creation=" + date_creation + ", photo=" + Arrays.toString(photo) + ", mats=" + mats
-				+ ", characteristic=" + characteristic + ", customers=" + customers + ", engineer=" + engineer
-				+ ", products=" + products + "]";
+				+ ", characteristic=" + characteristic + ", customers=" + customers + ", engineer=" + engineer + "]";
 	}
 
 }

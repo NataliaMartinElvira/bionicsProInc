@@ -311,8 +311,15 @@ public class JDBCManager implements DBManager {
 
 	Order temporaryOrder = new Order();
 
-	public void AddToOrder(Product product) {
-		// add that product to the order
+	public void AddToOrder(Product product, Order order) {
+		
+		int prodId = product.getId();
+		int orderId = order.getOrder_id();
+		try {
+			Statement 
+			String sql =  "INSERT INTO  Order (order_id,product_id) VALUES ('orderId','prodId') ";
+			
+		}
 	}
 
 	public List<String> viewCart(Order o) {

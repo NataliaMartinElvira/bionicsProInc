@@ -21,7 +21,8 @@ public class Product implements Serializable {
 	private ArrayList<Characteristic> characteristic;
 	private ArrayList<Customer> customers;
 	private ArrayList<Engineer> engineer;
-	private List<Product> products;
+
+	
 
 	public Product() {
 		super();

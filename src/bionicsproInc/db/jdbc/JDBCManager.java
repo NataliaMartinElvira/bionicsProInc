@@ -7,8 +7,6 @@ import java.util.List;
 import bionicsproInc.db.ifaces.DBManager;
 import bionicsproInc.db.pojos.*;
 
-;
-
 public class JDBCManager implements DBManager {
 	private Connection c;
 
@@ -38,11 +36,13 @@ public class JDBCManager implements DBManager {
 					+ " photo BLOB )";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
+
 			Statement stmt2 = c.createStatement();
 			String sql2 = "CREATE TABLE material " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name     TEXT     NOT NULL UNIQUE, " + " price REAL NOT NULL," + " amount   INTEGER	 NOT NULL)";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
+
 			Statement stmt3 = c.createStatement();
 			String sql3 = "CREATE TABLE customer " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " first_name     TEXT     NOT NULL, " + " last_name   TEXT  	NOT NULL, "
@@ -51,42 +51,50 @@ public class JDBCManager implements DBManager {
 					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
+
 			Statement stmt4 = c.createStatement();
-			String sql4 = "CREATE TABLE engineer " + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					+ " Name_surname     TEXT     NOT NULL UNIQUE, " + " contract_starting_date DATE NOT NULL UNIQUE,"
+			String sql4 = "CREATE TABLE engineer " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					+ " name_surname     TEXT     NOT NULL UNIQUE, " + " contract_starting_date DATE NOT NULL UNIQUE,"
 					+ " contract_ending_date DATE NOT NULL," + " current_service TEXT NOT NULL,"
 					+ " salary REAL NOT NULL," + " bonus REAL NOT NULL," + " project_achieved INTEGER NOT NULL,"
 					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL,"
 					+ " product_id INETEGR NOT NULL REFERENCES products(id)";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
+
 			Statement stmt5 = c.createStatement();
 			String sql5 = "CREATE TABLE characteristics " + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " length REAL NOT NULL," + " width REAL NOT NULL," + " weight REAL NOT NULL,"
 					+ " joint_numb INTEGER NOT NULL," + " flexibility_scale INTEGER NOT NULL)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
+
 			Statement stmt6 = c.createStatement();
-			String sql6 = "CREATE TABLE order " + "(order_id INTEGER PRIMARY KEY NOT NULL,"
+			String sql6 = "CREATE TABLE order " + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " product_id INTEGER NOT NULL REFERENCE products(id))";
 			stmt6.executeUpdate(sql6);
 			stmt6.close();
+
 			// now we create the table that references the N-N relationships
+
 			Statement stmt7 = c.createStatement();
 			String sql7 = "CREATE TABLE products_materials " + "(product_id  INTEGER REFERENCES products(id),"
 					+ " material_id INTEGER REFERENCES material(id))";
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
+
 			Statement stmt8 = c.createStatement();
 			String sql8 = "CREATE TABLE products_customers " + "(product_id INTEGER REFERENCES products(id),"
-					+ " customer_id INTEGER REFERENCES customer(person_id))";
+					+ " customer_id INTEGER REFERENCES customer(id))";
 			stmt8.executeUpdate(sql8);
 			stmt8.close();
+
 			Statement stmt9 = c.createStatement();
 			String sql9 = "CREATE TABLE engineers_products " + "(engineer_id INTEGER REFERENCES engineer(id),"
 					+ " product_id INTEGER REFERENCES products(id))";
 			stmt9.executeUpdate(sql9);
 			stmt9.close();
+
 			Statement stmt10 = c.createStatement();
 			String sql10 = "CREATE TABLE characteristics_product"
 					+ "(characteristics_id INTEGER REFERENCES products(id),"
@@ -94,11 +102,13 @@ public class JDBCManager implements DBManager {
 
 			stmt10.execute(sql10);
 			stmt10.close();
+
 			Statement stmt11 = c.createStatement();
 			String sql11 = " CREAT TABLE customer_order " + "(customer_id INTEGER REFERENCES customer(id), "
 					+ " order_id INTEGER REFERENCES order(order_id))";
 			stmt11.executeUpdate(sql11);
 			stmt11.close();
+
 		} catch (SQLException e) {
 			if (!e.getMessage().contains("already exists")) {
 				e.printStackTrace();
@@ -205,7 +215,7 @@ public class JDBCManager implements DBManager {
 		try {
 
 			Statement stmt = c.createStatement();
-			String sql = " INSERT INTO people (Name_surname,contract_strating_date,contract_ending_date,current_service,salary,bonus,project_achieved,"
+			String sql = " INSERT INTO people (name_surname,contract_strating_date,contract_ending_date,current_service,salary,bonus,project_achieved,"
 					+ " experience_in_years,date_of_birth,products)" + ") VALUES ('" + eng.getName_surname() + "','"
 					+ eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','"
 					+ eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','"
@@ -256,7 +266,7 @@ public class JDBCManager implements DBManager {
 	}
 
 	@Override
-	public List<Product> SearchProductByBody(String bodypart) {
+	public List<Product> searchProductByBody(String bodypart) {
 		List<Product> products = new ArrayList<Product>();
 		try {
 			String sql = "SELECT name FROM products WHERE bodypart LIKE ?";
@@ -291,7 +301,7 @@ public class JDBCManager implements DBManager {
 	}
 
 	@Override
-	public Engineer ViewBonus(int engId) {
+	public Engineer viewBonus(int engId) {
 		try {
 			String sql = "SELECT id,bonus FROM Engineer WHERE id= ?";
 			PreparedStatement stmt = c.prepareStatement(sql);
@@ -324,21 +334,18 @@ public class JDBCManager implements DBManager {
 		order.addProduct(product);
 
 	}
-	
-	/*public void removeFromOrder(Product product, Order order) {
 
-		try {
-			Statement stmt = c.createStatement();
-			String sql = "DELETE product_id, order_id FROM order WHERE order_id = ? AND product_id = ?" + " VALUES ('" + order.getOrder_id() + "','"
-					+ product.getId() + "')";
-			stmt.executeUpdate(sql);
-			stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		order.removeProduct(product.getId());
-
-	}*/
+	/*
+	 * public void removeFromOrder(Product product, Order order) {
+	 * 
+	 * try { Statement stmt = c.createStatement(); String sql =
+	 * "DELETE product_id, order_id FROM order WHERE order_id = ? AND product_id = ?"
+	 * + " VALUES ('" + order.getOrder_id() + "','" + product.getId() + "')";
+	 * stmt.executeUpdate(sql); stmt.close(); } catch (Exception e) {
+	 * e.printStackTrace(); } order.removeProduct(product.getId());
+	 * 
+	 * }
+	 */
 
 	public List<String> viewCart(Order o) {
 		List<String> p_names = new ArrayList<String>();

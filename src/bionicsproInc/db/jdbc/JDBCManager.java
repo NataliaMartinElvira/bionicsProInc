@@ -70,7 +70,7 @@ public class JDBCManager implements DBManager {
 			stmt5.close();
 
 			Statement stmt6 = c.createStatement();
-			String sql6 = "CREATE TABLE order " + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+			String sql6 = "CREATE TABLE order " + "(order_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " product_id INTEGER NOT NULL REFERENCE products(id))";
 			stmt6.executeUpdate(sql6);
 			stmt6.close();
@@ -478,7 +478,7 @@ public class JDBCManager implements DBManager {
 	public List<Product> viewProductsFromOrder(int orderId) {
 		List<Product> products = new ArrayList<Product>();
 		try {
-			String sql = "SELECT p.*, o.id FROM order as o JOIN product as p ON o.id=p.id WHERE o.id = ?";
+			String sql = "SELECT p.*, o.order_id, p.product_id FROM order as o JOIN product as p ON o.product_id=p.id WHERE o.order_id = ?";
 			PreparedStatement stmt = c.prepareStatement(sql);
 			stmt.setInt(1, orderId);
 			ResultSet rs = stmt.executeQuery();

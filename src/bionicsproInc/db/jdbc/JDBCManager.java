@@ -335,17 +335,6 @@ public class JDBCManager implements DBManager {
 
 	}
 
-	/*
-	 * public void removeFromOrder(Product product, Order order) {
-	 * 
-	 * try { Statement stmt = c.createStatement(); String sql =
-	 * "DELETE product_id, order_id FROM order WHERE order_id = ? AND product_id = ?"
-	 * + " VALUES ('" + order.getOrder_id() + "','" + product.getId() + "')";
-	 * stmt.executeUpdate(sql); stmt.close(); } catch (Exception e) {
-	 * e.printStackTrace(); } order.removeProduct(product.getId());
-	 * 
-	 * }
-	 */
 
 	public List<String> viewCart(Order o) {
 		List<String> p_names = new ArrayList<String>();

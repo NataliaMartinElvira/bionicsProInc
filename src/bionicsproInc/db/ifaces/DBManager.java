@@ -42,8 +42,6 @@ public interface DBManager {
 
 	public void addToOrder(Product product, Order order);
 
-	// public void removeFromOrder(Product product, Order order);
-
 	public List<String> viewCart(Order o);
 
 	public List<Integer> viewOtherOrders(int id);

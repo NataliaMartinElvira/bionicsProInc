@@ -1,30 +1,30 @@
 package bionicsproInc.db.pojos.users;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7993095458725676766L;
-	
+
 	@Id
-	@GeneratedValue(generator="users")
-	@TableGenerator(name="users", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="users")
+	@GeneratedValue(generator = "users")
+	@TableGenerator(name = "users", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users")
 	private Integer id;
 	private String email;
 	@Lob
 	private byte[] password;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="role_id")
+	@JoinColumn(name = "role_id")
 	private Role role;
-	
+
 	public User(String email, byte[] password, Role role) {
 		super();
 		this.email = email;
@@ -113,12 +113,5 @@ public class User implements Serializable {
 		return "User [id=" + id + ", email=" + email + ", password=" + Arrays.toString(password) + ", role=" + role
 				+ "]";
 	}
-	
-	
-	
-	
-	
-	
 
-	
 }

@@ -227,6 +227,16 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
+	public void addOrder(Order o) {
+		try {
+			Statement stmt=c.createStatement();
+			String sql= " INSERT INTO customer_order (order_id) VALUES ('"+ o.getOrder_id()+ "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public Engineer getEngineer(int id) {
@@ -318,8 +328,7 @@ public class JDBCManager implements DBManager {
 		return null;
 	}
 
-	Order temporaryOrder = new Order();
-
+	// LIKE ADDTOCART- THE SAME FUNCTION
 	public void addToOrder(Product product, Order order) {
 
 		try {
@@ -463,7 +472,7 @@ public class JDBCManager implements DBManager {
 		}
 		return materials;
 	}
-
+	// METHOD USED BY CUSTOMER TO VIEW PRODUCTS OF OTHER ORDERS ALREADY MADE
 	public List<Product> viewProductsFromOrder(int orderId) {
 		List<Product> products = new ArrayList<Product>();
 		try {

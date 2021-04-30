@@ -25,6 +25,8 @@ public interface DBManager {
 	public void addCustomer(Customer cust);
 
 	public void addEngineer(Engineer eng);
+	
+	public void addOrder(Order o);
 
 	public Engineer getEngineer(int id);
 

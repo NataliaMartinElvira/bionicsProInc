@@ -10,6 +10,7 @@ import java.util.List;
 
 import bionicsproInc.db.ifaces.*;
 import bionicsproInc.db.jdbc.JDBCManager;
+import bionicsproInc.db.pojos.Order;
 
 public class Menu {
 
@@ -18,6 +19,8 @@ public class Menu {
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
+	private static Order temporaryOrder = new Order();
 
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
@@ -97,7 +100,7 @@ public class Menu {
 				viewProduct();
 				break;
 			case 2:
-
+				makePurchase();
 				break;
 			case 3:
 
@@ -122,6 +125,7 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		dbman.viewCharacteristicsFromProduct(id);
 		dbman.viewMaterialsFromProduct(id);
+		// TODO ADD PRODUCT TO CART IF USER WANTS TO
 	}
 	/*
 	 * private static void addProduct() throws Exception {
@@ -161,6 +165,19 @@ public class Menu {
 		System.out.println("Introduce your id");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.viewBonus(id);
+	}
+	//CUSTOMER OPTION 2
+	private static void makePurchase() throws Exception{
+		System.out.println("These are the products: \n");
+		dbman.viewCart(temporaryOrder);
+		System.out.println("Are you sure?" + "1->YES 0->NO");
+		int option=Integer.parseInt(reader.readLine());
+		if(option==1) {
+			dbman.addOrder(temporaryOrder);
+		}
+		else{
+			return;
+		}
 	}
 
 }

@@ -19,7 +19,7 @@ public class Menu {
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+	
 	private static Order temporaryOrder = new Order();
 
 	public static void main(String[] args) throws Exception {
@@ -103,7 +103,7 @@ public class Menu {
 				makePurchase();
 				break;
 			case 3:
-				changeProduct();
+
 				break;
 			case 4:
 
@@ -166,40 +166,18 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		dbman.viewBonus(id);
 	}
-
-	// CUSTOMER OPTION 2
-	private static void makePurchase() throws Exception {
-		try {
-			System.out.println("These are the products: \n");
-			dbman.viewCart(temporaryOrder);
-			System.out.println("Are you sure?" + "1->YES 0->NO");
-			int option = Integer.parseInt(reader.readLine());
-			if (option == 1) {
-				dbman.addOrder(temporaryOrder);
-			} else {
-				return;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	//CUSTOMER OPTION 2
+	private static void makePurchase() throws Exception{
+		System.out.println("These are the products: \n");
+		dbman.viewCart(temporaryOrder);
+		System.out.println("Are you sure?" + "1->YES 0->NO");
+		int option=Integer.parseInt(reader.readLine());
+		if(option==1) {
+			dbman.addOrder(temporaryOrder);
+		}
+		else{
+			return;
 		}
 	}
-
-	// CUSTOMER OPTION 3
-	private static void changeProduct() throws Exception {
-		try {
-			System.out.println("Choose the product you want to remove from cart");
-			dbman.viewCart(temporaryOrder);
-			String pName = reader.readLine();
-			System.out.println("Are you sure you want to delete that product? 1->YES 0->NO");
-			int option = Integer.parseInt(reader.readLine());
-			if (option == 1) {
-				dbman.deleteProdFromCart(pName, temporaryOrder);
-			} else {
-				return;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 }

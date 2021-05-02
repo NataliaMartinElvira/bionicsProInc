@@ -105,7 +105,7 @@ public class Menu {
 				makePurchase();
 				break;
 			case 3:
-
+				changeProduct();
 				break;
 			case 4:
 				

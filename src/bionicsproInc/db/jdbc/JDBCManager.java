@@ -129,9 +129,9 @@ public class JDBCManager implements DBManager {
 	public void addProduct(Product p) {
 		try {
 			Statement st1 = c.createStatement();
-			String sql = "INSERT INTO products (name,bodypart,price,date_creation,photo) " + " VALUES('" + p.getName()
+			String sql = "INSERT INTO products (name,bodypart,price,date_creation) " + " VALUES('" + p.getName()
 					+ "','" + p.getBodypart() + "','" + p.getPrice() + "','" + p.getDate_creation() + "','"
-					+ p.getPhoto() + "')'";
+					+  "')'";
 			st1.executeUpdate(sql);
 			st1.close();
 		} catch (Exception e) {
@@ -420,8 +420,8 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
-	public List<Characteristic> viewCharacteristicsFromProduct(int prodId) {
-		List<Characteristic> characteristics = new ArrayList<Characteristic>();
+	public ArrayList<Characteristic> viewCharacteristicsFromProduct(int prodId) {
+		ArrayList<Characteristic> characteristics = new ArrayList<Characteristic>();
 		try {
 			String sql = "SELECT c.*, p.id FROM characteristics_product as cp JOIN characteristics as c "
 					+ "ON cp.characteristic_id = c.id JOIN products as p ON cp.products_id = p.id WHERE p.id = ?";
@@ -448,8 +448,8 @@ public class JDBCManager implements DBManager {
 		return characteristics;
 	}
 
-	public List<Material> viewMaterialsFromProduct(int prodId) {
-		List<Material> materials = new ArrayList<Material>();
+	public ArrayList<Material> viewMaterialsFromProduct(int prodId) {
+		ArrayList<Material> materials = new ArrayList<Material>();
 		try {
 			String sql = "SELECT m.*, p.id FROM products_materials as pm JOIN materials as m "
 					+ "ON pm.material_id = m.id JOIN products as p ON pm.products_id = p.id WHERE p.id = ?";
@@ -494,5 +494,7 @@ public class JDBCManager implements DBManager {
 		return products;
 
 	}
+	
+	
 
 }

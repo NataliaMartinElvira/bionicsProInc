@@ -1,16 +1,16 @@
 package bionicsproInc.ui;
 
 import java.io.BufferedReader;
+
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import bionicsproInc.db.ifaces.*;
 import bionicsproInc.db.jdbc.JDBCManager;
 import bionicsproInc.db.pojos.Order;
+import bionicsproInc.db.pojos.Product;
 
 public class Menu {
 
@@ -18,10 +18,12 @@ public class Menu {
 	// private static UserManager userman = new JPAUserManager();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
 	private static Order temporaryOrder = new Order();
+	
+	private static Product localprod = new Product();
 
+	private static JDBCManager JDBCmethod = new  JDBCManager();
+	
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
 		// userman.connect();
@@ -65,13 +67,13 @@ public class Menu {
 				viewProduct();
 				break;
 			case 2:
-				// addProduct();
+				 addprod();
 				break;
 			case 3:
 				removeProduct();
 				break;
 			case 4:
-
+				seeProject();
 				break;
 			case 5:
 				viewBonus();
@@ -106,7 +108,7 @@ public class Menu {
 				changeProduct();
 				break;
 			case 4:
-
+				
 				break;
 			case 0:
 				return;
@@ -201,5 +203,53 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
+	// Engineer OPTION 5
+	private static void seeProject() throws Exception {
+		try {
+			System.out.println("Introduce your ID : ");	
+			int id = Integer.parseInt(reader.readLine());
+			dbman.viewProjectAchieved(id);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
+	// Engineer OPTION 4
+	// NEED TO SPEAK ABOUT HOW TO ADD PHOTO ATTRIBUTE FROM A STRING ... 
+	private static void addprod() throws Exception {
+		try {
+			
+			 int y, m, d; 
+			System.out.println("Introduce prothesis id : ");
+			int id = Integer.parseInt(reader.readLine());
+			localprod.setId(id);
+			System.out.println("Introduce prothesis name : ");
+			String name = reader.readLine();
+			localprod.setName(name);
+			System.out.println("Introduce prothesis bodypart : ");
+			String bodypart = reader.readLine();
+			localprod.setBodypart(bodypart);
+			System.out.println("Introduce prothesis price : ");
+			Float price = Float.parseFloat(reader.readLine());
+			localprod.setPrice(price);
+			System.out.println("Introduce prothesis creation's year : ");
+			y = Integer.parseInt(reader.readLine());
+			System.out.println("Introduce prothesis creation's month : ");
+			m = Integer.parseInt(reader.readLine());
+			System.out.println("Introduce prothesis creation's day : ");
+			d = Integer.parseInt(reader.readLine());
+			LocalDate ld =  LocalDate.of(y,m,d);
+			ZoneId systemTimeZone = ZoneId.systemDefault();
+			ZonedDateTime zonedDateTime = ld.atStartOfDay(systemTimeZone);
+			Date date = (Date) Date.from(zonedDateTime.toInstant());
+			localprod.setDate_creation(date);
+			localprod.setCharacteristic(JDBCmethod.viewCharacteristicsFromProduct(id));
+			localprod.setMats(JDBCmethod.viewMaterialsFromProduct(id));
+			dbman.addProduct(localprod);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
+

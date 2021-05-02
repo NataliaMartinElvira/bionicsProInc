@@ -5,6 +5,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author macbookair
+ *
+ */
 public class Product implements Serializable {
 	/**
 	 * 
@@ -20,6 +24,26 @@ public class Product implements Serializable {
 	private ArrayList<Characteristic> characteristic;
 	private ArrayList<Customer> customers;
 	private ArrayList<Engineer> engineer;
+
+	
+	public Product() {
+		super();
+	}
+	
+
+	public Product(int id, String name, String bodypart, Float price, Date date_creation, byte[] photo,ArrayList<Material> mats, ArrayList<Characteristic> characteristic, ArrayList<Customer> customers,ArrayList<Engineer> engineer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.bodypart = bodypart;
+		this.price = price;
+		this.date_creation = date_creation;
+		this.photo = photo;
+		this.mats = mats;
+		this.characteristic = characteristic;
+		this.customers = customers;
+		this.engineer = engineer;
+	}
 
 	public Product(int id, String name) {
 		super();
@@ -184,23 +208,7 @@ public class Product implements Serializable {
 		return true;
 	}
 
-	public Product(int id, String name, String bodypart, Float price, Date date_creation, byte[] photo,
-			ArrayList<Material> mats, ArrayList<Characteristic> characteristic, ArrayList<Customer> customers,
-			ArrayList<Engineer> engineer) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.bodypart = bodypart;
-		this.price = price;
-		this.date_creation = date_creation;
-		this.photo = photo;
-		this.mats = mats;
-		this.characteristic = characteristic;
-		this.customers = customers;
-		this.engineer = engineer;
-
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", bodypart=" + bodypart + ", price=" + price

@@ -8,21 +8,17 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import bionicsproInc.db.ifaces.*;
 import bionicsproInc.db.jdbc.JDBCManager;
 import bionicsproInc.db.jpa.JPAUserManager;
-import bionicsproInc.db.pojos.Order;
-import bionicsproInc.db.pojos.Product;
-import bionicsproInc.db.pojos.users.Role;
-import bionicsproInc.db.pojos.users.User;
+import bionicsproInc.db.pojos.*;
+import bionicsproInc.db.pojos.users.*;
 
 public class Menu {
 
 	private static DBManager dbman = new JDBCManager();
 	private static UserManager userman = new JPAUserManager();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static Order temporaryOrder = new Order();
 	private static Product localprod = new Product();
 	private static JDBCManager JDBCmethod = new JDBCManager();
@@ -164,7 +160,7 @@ public class Menu {
 		} while (true);
 	}
 
-	//Engineer and Customer OPTION 1
+	// Engineer and Customer OPTION 1
 	private static void viewProduct() throws Exception {
 		System.out.println("Choose a bodypart:");
 		dbman.viewBodyparts();
@@ -214,7 +210,7 @@ public class Menu {
 		}
 
 	}
-	
+
 	// Engineer OPTION 3
 	private static void seeProject() throws Exception {
 		try {

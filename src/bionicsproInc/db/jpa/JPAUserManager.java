@@ -13,21 +13,20 @@ import bionicsproInc.db.ifaces.UserManager;
 import bionicsproInc.db.pojos.users.Role;
 import bionicsproInc.db.pojos.users.User;
 
-
 public class JPAUserManager implements UserManager {
 
 	private EntityManager em;
 
 	@Override
 	public void connect() {
-		em = Persistence.createEntityManagerFactory("user-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("company-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
 		List<Role> existingRoles = this.getRoles();
 		if (existingRoles.size()<2) {
-			this.newRole(new Role("admin"));
-			this.newRole(new Role("user"));
+			this.newRole(new Role("engineer"));
+			this.newRole(new Role("customer"));
 		}
 	}
 
@@ -36,21 +35,21 @@ public class JPAUserManager implements UserManager {
 		em.close();
 	}
 
-	
+	@Override
 	public void newUser(User u) {
 		em.getTransaction().begin();
 		em.persist(u);
 		em.getTransaction().commit();
 	}
 
-
+	@Override
 	public void newRole(Role r) {
 		em.getTransaction().begin();
 		em.persist(r);
 		em.getTransaction().commit();
 	}
 
-
+	@Override
 	public Role getRole(int id) {
 		Query q = em.createNativeQuery("SELECT * FROM roles WHERE id = ?", Role.class);
 		q.setParameter(1, id);
@@ -58,13 +57,13 @@ public class JPAUserManager implements UserManager {
 
 	}
 
-
+	@Override
 	public List<Role> getRoles() {
 		Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
 		return (List<Role>) q.getResultList();
 	}
 
-
+	@Override
 	public User checkPassword(String email, String password) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

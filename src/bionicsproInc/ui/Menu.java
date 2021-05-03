@@ -1,25 +1,39 @@
 package bionicsproInc.ui;
 
 import java.io.BufferedReader;
+
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import bionicsproInc.db.ifaces.*;
 import bionicsproInc.db.jdbc.JDBCManager;
+<<<<<<< HEAD
 
+=======
+import bionicsproInc.db.pojos.Order;
+import bionicsproInc.db.pojos.Product;
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 
 public class Menu {
 
 	private static DBManager dbman = new JDBCManager();
 	//private static UserManager userman = new JPAUserManager();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+<<<<<<< HEAD
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+=======
+
+	private static Order temporaryOrder = new Order();
+	
+	private static Product localprod = new Product();
+
+	private static JDBCManager JDBCmethod = new  JDBCManager();
+	
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
 		//userman.connect();
@@ -63,13 +77,21 @@ public class Menu {
 			viewProduct();
 				break;
 			case 2:
+<<<<<<< HEAD
 			//addProduct();
+=======
+				 addprod();
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 				break;
 			case 3:
 			
 				break;
 			case 4:
+<<<<<<< HEAD
 			
+=======
+				seeProject();
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 				break;
 			case 5:
 	
@@ -102,7 +124,11 @@ public class Menu {
 			
 				break;
 			case 4:
+<<<<<<< HEAD
 			
+=======
+				
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 				break;
 			case 0:
 				return;
@@ -138,9 +164,30 @@ public class Menu {
 		while() {
 		aqui ir añadiendo materiales, falta funcion viewAllMaterials
 		}
+<<<<<<< HEAD
 		System.out.print("Add the characteristic/s of the product: ");
 		while() {
 		aqui ir añadiendo caracteristicas, falta funcion viewAllCharacteristics
+=======
+	}
+
+	private static void viewBonus() throws Exception {
+		System.out.println("Introduce your id");
+		int id = Integer.parseInt(reader.readLine());
+		dbman.viewBonus(id);
+	}
+	//CUSTOMER OPTION 2
+	private static void makePurchase() throws Exception{
+		System.out.println("These are the products: \n");
+		dbman.viewCart(temporaryOrder);
+		System.out.println("Are you sure?" + "1->YES 0->NO");
+		int option=Integer.parseInt(reader.readLine());
+		if(option==1) {
+			dbman.addOrder(temporaryOrder);
+		}
+		else{
+			return;
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 		}
 		
 		
@@ -150,9 +197,80 @@ public class Menu {
 		dbman.addProduct(product);*/
 	}
 	
+<<<<<<< HEAD
+	
+=======
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
+
+<<<<<<< HEAD
 	
 
 	
-
-	
+=======
+	// CUSTOMER OPTION 3
+	private static void changeProduct() throws Exception {
+		try {
+			System.out.println("Choose the product you want to remove from cart");
+			dbman.viewCart(temporaryOrder);
+			String pName = reader.readLine();
+			System.out.println("Are you sure you want to delete that product? 1->YES 0->NO");
+			int option = Integer.parseInt(reader.readLine());
+			if (option == 1) {
+				dbman.deleteProdFromCart(pName, temporaryOrder);
+			} else {
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// Engineer OPTION 5
+	private static void seeProject() throws Exception {
+		try {
+			System.out.println("Introduce your ID : ");	
+			int id = Integer.parseInt(reader.readLine());
+			dbman.viewProjectAchieved(id);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
+	// Engineer OPTION 4
+	// NEED TO SPEAK ABOUT HOW TO ADD PHOTO ATTRIBUTE FROM A STRING ... 
+	private static void addprod() throws Exception {
+		try {
+			
+			 int y, m, d; 
+			System.out.println("Introduce prothesis id : ");
+			int id = Integer.parseInt(reader.readLine());
+			localprod.setId(id);
+			System.out.println("Introduce prothesis name : ");
+			String name = reader.readLine();
+			localprod.setName(name);
+			System.out.println("Introduce prothesis bodypart : ");
+			String bodypart = reader.readLine();
+			localprod.setBodypart(bodypart);
+			System.out.println("Introduce prothesis price : ");
+			Float price = Float.parseFloat(reader.readLine());
+			localprod.setPrice(price);
+			System.out.println("Introduce prothesis creation's year : ");
+			y = Integer.parseInt(reader.readLine());
+			System.out.println("Introduce prothesis creation's month : ");
+			m = Integer.parseInt(reader.readLine());
+			System.out.println("Introduce prothesis creation's day : ");
+			d = Integer.parseInt(reader.readLine());
+			LocalDate ld =  LocalDate.of(y,m,d);
+			ZoneId systemTimeZone = ZoneId.systemDefault();
+			ZonedDateTime zonedDateTime = ld.atStartOfDay(systemTimeZone);
+			Date date = (Date) Date.from(zonedDateTime.toInstant());
+			localprod.setDate_creation(date);
+			localprod.setCharacteristic(JDBCmethod.viewCharacteristicsFromProduct(id));
+			localprod.setMats(JDBCmethod.viewMaterialsFromProduct(id));
+			dbman.addProduct(localprod);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+>>>>>>> branch 'master' of https://github.com/NataliaMartinElvira/bionicsProInc
 }
+

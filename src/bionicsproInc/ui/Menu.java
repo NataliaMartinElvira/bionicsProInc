@@ -10,21 +10,19 @@ import java.util.List;
 
 import bionicsproInc.db.ifaces.*;
 import bionicsproInc.db.jdbc.JDBCManager;
-import bionicsproInc.db.pojos.Order;
+
 
 public class Menu {
 
 	private static DBManager dbman = new JDBCManager();
-	// private static UserManager userman = new JPAUserManager();
+	//private static UserManager userman = new JPAUserManager();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-	private static Order temporaryOrder = new Order();
 
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
-		// userman.connect();
+		//userman.connect();
 		do {
 			System.out.println("Choose an option:");
 			System.out.println("1. TODO");
@@ -40,7 +38,7 @@ public class Menu {
 				break;
 			case 0:
 				dbman.disconnect();
-				// userman.disconnect();
+				//userman.disconnect();
 				System.exit(0);
 				break;
 			default:
@@ -49,7 +47,7 @@ public class Menu {
 		} while (true);
 
 	}
-
+	
 	private static void engineerMenu() throws Exception {
 		do {
 			System.out.println("Choose an option:");
@@ -62,20 +60,19 @@ public class Menu {
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
 			case 1:
-				viewProduct();
+			viewProduct();
 				break;
 			case 2:
-				// addProduct();
+			//addProduct();
 				break;
 			case 3:
-				removeProduct();
+			
 				break;
 			case 4:
-
+			
 				break;
 			case 5:
-				viewBonus();
-
+	
 				break;
 
 			case 0:
@@ -85,7 +82,6 @@ public class Menu {
 			}
 		} while (true);
 	}
-
 	private static void customerMenu() throws Exception {
 		do {
 			System.out.println("Choose an option:");
@@ -97,16 +93,16 @@ public class Menu {
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
 			case 1:
-				viewProduct();
+			viewProduct();
 				break;
 			case 2:
-				makePurchase();
+				
 				break;
 			case 3:
-				changeProduct();
+			
 				break;
 			case 4:
-
+			
 				break;
 			case 0:
 				return;
@@ -115,7 +111,7 @@ public class Menu {
 			}
 		} while (true);
 	}
-
+	
 	private static void viewProduct() throws Exception {
 		System.out.println("Choose a bodypart:");
 		dbman.viewBodyparts();
@@ -125,81 +121,38 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		dbman.viewCharacteristicsFromProduct(id);
 		dbman.viewMaterialsFromProduct(id);
-		// TODO ADD PRODUCT TO CART IF USER WANTS TO
 	}
 	/*
-	 * private static void addProduct() throws Exception {
-	 * System.out.println("Input the product information:");
-	 * System.out.print("Name: "); String name = reader.readLine();
-	 * System.out.print("Body part: "); String bodypart = reader.readLine();
-	 * System.out.print("Price: "); float price =
-	 * Float.parseFloat(reader.readLine());
-	 * System.out.print("Start Creation (yyyy-MM-dd): "); LocalDate startDate =
-	 * LocalDate.parse(reader.readLine(), formatter); //photo
-	 * System.out.print("Add the material/s of the product: "); while() { aqui ir
-	 * añadiendo materiales, falta funcion viewAllMaterials }
-	 * System.out.print("Add the characteristic/s of the product: "); while() { aqui
-	 * ir añadiendo caracteristicas, falta funcion viewAllCharacteristics }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * Product prod = new Product(name, bodypart, price, Date.valueOf(startDate),
-	 * ...); dbman.addProduct(product); }
-	 */
-
-	private static void removeProduct() throws Exception {
-		System.out.println("Id from product to delete");
-		int id = Integer.parseInt(reader.readLine());
-		System.out.println("Are you sure?" + "1->YES 0->NO");
-		int option = Integer.parseInt(reader.readLine());
-		if (option == 1) {
-			dbman.removeProd(id);
-			;
-		} else {
-			return;
+	private static void addProduct() throws Exception {
+		System.out.println("Input the product information:");
+		System.out.print("Name: ");
+		String name = reader.readLine();
+		System.out.print("Body part: ");
+		String bodypart = reader.readLine();
+		System.out.print("Price: ");
+		float price = Float.parseFloat(reader.readLine());
+		System.out.print("Start Creation (yyyy-MM-dd): ");
+		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
+		//photo
+		System.out.print("Add the material/s of the product: ");
+		while() {
+		aqui ir añadiendo materiales, falta funcion viewAllMaterials
 		}
-	}
-
-	private static void viewBonus() throws Exception {
-		System.out.println("Introduce your id");
-		int id = Integer.parseInt(reader.readLine());
-		dbman.viewBonus(id);
-	}
-
-	// CUSTOMER OPTION 2
-	private static void makePurchase() throws Exception {
-		try {
-			System.out.println("These are the products: \n");
-			dbman.viewCart(temporaryOrder);
-			System.out.println("Are you sure?" + "1->YES 0->NO");
-			int option = Integer.parseInt(reader.readLine());
-			if (option == 1) {
-				dbman.addOrder(temporaryOrder);
-			} else {
-				return;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		System.out.print("Add the characteristic/s of the product: ");
+		while() {
+		aqui ir añadiendo caracteristicas, falta funcion viewAllCharacteristics
 		}
+		
+		
+		
+		
+		Product prod = new Product(name, bodypart, price, Date.valueOf(startDate), ...);
+		dbman.addProduct(product);*/
 	}
+	
+	
 
-	// CUSTOMER OPTION 3
-	private static void changeProduct() throws Exception {
-		try {
-			System.out.println("Choose the product you want to remove from cart");
-			dbman.viewCart(temporaryOrder);
-			String pName = reader.readLine();
-			System.out.println("Are you sure you want to delete that product? 1->YES 0->NO");
-			int option = Integer.parseInt(reader.readLine());
-			if (option == 1) {
-				dbman.deleteProdFromCart(pName, temporaryOrder);
-			} else {
-				return;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
+	
 }

@@ -19,7 +19,7 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public void connect() {
-		em = Persistence.createEntityManagerFactory("company-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("user-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();

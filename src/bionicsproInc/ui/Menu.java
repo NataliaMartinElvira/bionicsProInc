@@ -47,6 +47,9 @@ public class Menu {
 			default:
 				break;
 			}
+			engineerMenu();
+			customerMenu();
+			
 		} while (true);
 
 	}

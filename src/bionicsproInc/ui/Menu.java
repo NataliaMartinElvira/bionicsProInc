@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import bionicsproInc.db.ifaces.*;
 import bionicsproInc.db.jdbc.JDBCManager;
 import bionicsproInc.db.jpa.JPAUserManager;
@@ -22,6 +23,7 @@ public class Menu {
 	private static Order temporaryOrder = new Order();
 	private static Product localprod = new Product();
 	private static JDBCManager JDBCmethod = new JDBCManager();
+	private static List<Product> p;
 
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
@@ -47,9 +49,7 @@ public class Menu {
 			default:
 				break;
 			}
-			engineerMenu();
-			customerMenu();
-			
+
 		} while (true);
 
 	}
@@ -139,7 +139,7 @@ public class Menu {
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
 			case 1:
-				viewProduct();
+				viewProductC();
 				break;
 
 			case 2:
@@ -164,7 +164,7 @@ public class Menu {
 		} while (true);
 	}
 
-	// Engineer and Customer OPTION 1
+	// Engineer OPTION 1
 	private static void viewProduct() throws Exception {
 		System.out.println("Choose a bodypart:");
 		dbman.viewBodyparts();
@@ -244,15 +244,48 @@ public class Menu {
 		dbman.viewBonus(id);
 	}
 
+	// CUSTOMER OPTION 1
+	private static void viewProductC() throws Exception {
+		try {
+			System.out.println("Choose a bodypart:");
+			dbman.viewBodyparts();
+			String name = reader.readLine();
+			dbman.searchProductByBody(name);
+			System.out.println("Choose a product: ");
+			int id = Integer.parseInt(reader.readLine());
+			dbman.viewCharacteristicsFromProduct(id);
+			dbman.viewMaterialsFromProduct(id);
+			System.out.println("Do you want to add it to your cart? 1->YES 0->NO");
+			int op=Integer.parseInt(reader.readLine());
+			if(op==1) {
+				for(int i=1;i<p.size(); i++) {
+					if (p.get(i).getId()==id) {
+						Product pr=p.get(i);
+						dbman.addToOrder(pr, temporaryOrder);
+					}
+				}
+			}
+			else {
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// Customer OPTION 2
 	private static void makePurchase() throws Exception {
-		System.out.println("These are the products: \n");
-		dbman.viewCart(temporaryOrder);
-		System.out.println("Are you sure? " + " 1->YES 0->NO");
-		int option = Integer.parseInt(reader.readLine());
-		if (option == 1) {
-			dbman.addOrder(temporaryOrder);
-		} else {
+		try {
+			System.out.println("These are the products: \n");
+			dbman.viewCart(temporaryOrder);
+			System.out.println("Are you sure? " + " 1->YES 0->NO");
+			int option = Integer.parseInt(reader.readLine());
+			if (option == 1) {
+				dbman.addOrder(temporaryOrder);
+			} else {
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -273,24 +306,24 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
+
 	// CUSTOMER OPTION 4
-	private static void seeOtherPurchases() throws Exception{
+	private static void seeOtherPurchases() throws Exception {
 		try {
 			System.out.println("Confirm your ID: ");
-			int id= Integer.parseInt(reader.readLine());
+			int id = Integer.parseInt(reader.readLine());
 			dbman.viewOtherOrders(id);
 			System.out.println("Do you want to select a product? 1->YES 0->NO");
-			int option=Integer.parseInt(reader.readLine());
-			if (option==1) {
+			int option = Integer.parseInt(reader.readLine());
+			if (option == 1) {
 				System.out.println("Select id of product: ");
-				int p_id= Integer.parseInt(reader.readLine());
+				int p_id = Integer.parseInt(reader.readLine());
 				dbman.viewCharacteristicsFromProduct(p_id);
 				dbman.viewMaterialsFromProduct(p_id);
-			}
-			else {
+			} else {
 				return;
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

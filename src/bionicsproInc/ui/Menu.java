@@ -151,6 +151,7 @@ public class Menu {
 				break;
 
 			case 4:
+				seeOtherPurchases();
 				break;
 
 			case 0:
@@ -269,6 +270,27 @@ public class Menu {
 				return;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// CUSTOMER OPTION 4
+	private static void seeOtherPurchases() throws Exception{
+		try {
+			System.out.println("Confirm your ID: ");
+			int id= Integer.parseInt(reader.readLine());
+			dbman.viewOtherOrders(id);
+			System.out.println("Do you want to select a product? 1->YES 0->NO");
+			int option=Integer.parseInt(reader.readLine());
+			if (option==1) {
+				System.out.println("Select id of product: ");
+				int p_id= Integer.parseInt(reader.readLine());
+				dbman.viewCharacteristicsFromProduct(p_id);
+				dbman.viewMaterialsFromProduct(p_id);
+			}
+			else {
+				return;
+			}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

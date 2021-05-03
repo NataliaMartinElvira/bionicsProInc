@@ -6,21 +6,23 @@
 	<!-- Persistence Provider -->
 	<!-- RESOURCE-LOCAL: Application-managed transactions -->
 	<!-- JTA: Container-managed transactions -->
-	<persistence-unit name="company-provider" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="user-provider" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->
-		<class>bionicproInc.db.pojos.Product</class>
-		<class>bionicproInc.db.pojos.Material</class>
-		<class>bionicproInc.db.pojos.Characteristic</class>
-		<class>bionicproInc.db.pojos.Customer</class>
-		<class>bionicproInc.db.pojos.Engineer</class>
-		<class>bionicproInc.db.pojos.Order</class>
+	<!--    	<class>bionicsproInc.db.pojos.Product</class>
+		<class>bionicsproInc.db.pojos.Material</class>
+		<class>bionicsproInc.db.pojos.Characteristic</class>
+		<class>bionicsproInc.db.pojos.Customer</class>
+		<class>bionicsproInc.db.pojos.Engineer</class>
+		<class>bionicsproInc.db.pojos.Order</class>  -->
+		<class>bionicsproInc.db.pojos.users.Role</class>
+		<class>bionicsproInc.db.pojos.users.User</class> 
  
 		<properties>	
 			<!-- Connection properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
-		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/company.db" />
+		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/bionicsproInc.db" />
 			<!-- Fill if we need user and password -->
 			<property name="javax.persistence.jdbc.user" value="" />
 			<property name="javax.persistence.jdbc.password" value="" />

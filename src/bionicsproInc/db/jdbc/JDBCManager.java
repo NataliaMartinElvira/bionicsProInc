@@ -46,7 +46,7 @@ public class JDBCManager implements DBManager {
 			Statement stmt3 = c.createStatement();
 			String sql3 = "CREATE TABLE customer " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " first_name     TEXT     NOT NULL, " + " last_name   TEXT  	NOT NULL, "
-					+ " age INTEGER NOT NULL," + " gender TEXT CHECK(gender = 'Male' OR gender = 'Female'),"
+					+ " age INTEGER NOT NULL," + " gender TEXT NOT NULL,"
 					+ " phone INTEGER NOT NULL," + " email TEXT NOT NULL," + " street TEXT NOT NULL,"
 					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL)";
 			stmt3.executeUpdate(sql3);
@@ -58,7 +58,7 @@ public class JDBCManager implements DBManager {
 					+ " contract_ending_date DATE NOT NULL," + " current_service TEXT NOT NULL,"
 					+ " salary REAL NOT NULL," + " bonus REAL NOT NULL," + " project_achieved INTEGER NOT NULL,"
 					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL,"
-					+ " product_id INETEGR NOT NULL REFERENCES products(id)";
+					+ " product_id INETEGR NOT NULL REFERENCES products(id))";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
 
@@ -69,11 +69,12 @@ public class JDBCManager implements DBManager {
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 
-			Statement stmt6 = c.createStatement();
+			//TODO Repasar las tablas bien
+			/*Statement stmt6 = c.createStatement();
 			String sql6 = "CREATE TABLE order " + "(order_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " product_id INTEGER NOT NULL REFERENCE products(id))";
+					+ " product_id INTEGER  REFERENCES products(id))";
 			stmt6.executeUpdate(sql6);
-			stmt6.close();
+			stmt6.close();*/
 
 			// now we create the table that references the N-N relationships
 
@@ -103,11 +104,13 @@ public class JDBCManager implements DBManager {
 			stmt10.execute(sql10);
 			stmt10.close();
 
-			Statement stmt11 = c.createStatement();
-			String sql11 = " CREAT TABLE customer_order " + "(customer_id INTEGER REFERENCES customer(id), "
+			/*TODO REVISAR
+			 * Statement stmt11 = c.createStatement();
+			 
+			String sql11 = " CREATE TABLE customer_order " + "(customer_id INTEGER REFERENCES customer(id), "
 					+ " order_id INTEGER REFERENCES order(order_id))";
 			stmt11.executeUpdate(sql11);
-			stmt11.close();
+			stmt11.close();*/
 
 		} catch (SQLException e) {
 			if (!e.getMessage().contains("already exists")) {

@@ -17,7 +17,7 @@ public class JDBCManager implements DBManager {
 			c = DriverManager.getConnection("jdbc:sqlite:./db/bionicsproInc.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
-			this.createTables();
+			//this.createTables();
 		} catch (SQLException sqlE) {
 			System.out.println("There was a database exception.");
 			sqlE.printStackTrace();
@@ -120,6 +120,7 @@ public class JDBCManager implements DBManager {
 		try {
 			// Close database connection
 			c.close();
+			System.out.println("Database is closed .");
 		} catch (SQLException e) {
 			System.out.println("There was a problem while closing the database connection.");
 			e.printStackTrace();
@@ -215,11 +216,11 @@ public class JDBCManager implements DBManager {
 		try {
 
 			Statement stmt = c.createStatement();
-			String sql = " INSERT INTO people (name_surname,contract_strating_date,contract_ending_date,current_service,salary,bonus,project_achieved,"
-					+ " experience_in_years,date_of_birth,products)" + ") VALUES ('" + eng.getName_surname() + "','"
+			String sql = " INSERT INTO Engineer (id, name_surname, contract_starting_date, contract_ending_date, current_service, salary, bonus, project_achieved,"
+					+ " experience_in_years, date_of_birth) " + " VALUES ('" + eng.getId()+ "','" + eng.getName_surname() + "','"
 					+ eng.getContract_strating_date() + "','" + eng.getContract_ending_date() + "','"
-					+ eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getProject_achieved() + "','"
-					+ eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "','" + eng.getProducts() + "')";
+					+ eng.getCurrent_service() + "','" + eng.getSalary() + "','" + eng.getBonus() + "','" + eng.getProject_achieved() + "','"
+					+ eng.getExperience_in_years() + "','" + eng.getDate_of_birth() + "');";
 			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (Exception e) {

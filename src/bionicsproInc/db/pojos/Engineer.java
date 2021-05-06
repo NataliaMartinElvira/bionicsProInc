@@ -3,7 +3,7 @@ package bionicsproInc.db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
-
+import java.sql.*;
 public class Engineer implements Serializable {
 	/**
 	 * 
@@ -20,6 +20,24 @@ public class Engineer implements Serializable {
 	private int experience_in_years;
 	private Date date_of_birth;
 	private ArrayList<Product> products;
+	
+	
+	public Engineer(int id, String name_surname, Date contract_strating_date, Date contract_ending_date,
+			String current_service, float d, float e, int project_achieved, int experience_in_years,
+			Date date_of_birth) {
+		super();
+		this.id = id;
+		this.name_surname = name_surname;
+		this.contract_strating_date = contract_strating_date;
+		this.contract_ending_date = contract_ending_date;
+		this.current_service = current_service;
+		this.salary = d;
+		this.bonus = e;
+		this.project_achieved = project_achieved;
+		this.experience_in_years = experience_in_years;
+		this.date_of_birth = date_of_birth;
+		
+	}
 
 	public Engineer(int id, float bonus) {
 		super();

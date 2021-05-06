@@ -10,9 +10,7 @@ import javax.persistence.*;
 @Table(name="roles")
 public class Role implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -7421790002967283667L;
 	@Id
 	@GeneratedValue(generator = "roles")

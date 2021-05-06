@@ -27,7 +27,7 @@ public class JPAUserManager implements UserManager {
 		if (existingRoles.size()<2) {
 
 			this.newRole(new Role("engineer"));
-			this.newRole(new Role("costumer")); 
+			this.newRole(new Role("customer")); 
 
 		}
 	}

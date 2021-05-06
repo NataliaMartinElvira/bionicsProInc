@@ -79,7 +79,7 @@ public class Menu {
 		if (user == null) {
 			System.out.println("Wrong email or password");
 			return;
-		} else if (user.getRole().getName().equalsIgnoreCase("engineer")) {
+		} else if (user.getRole().getName().equalsIgnoreCase("engineer") ) {
 			engineerMenu();
 		} else if (user.getRole().getName().equalsIgnoreCase("customer")) {
 			customerMenu();
@@ -88,7 +88,7 @@ public class Menu {
 
 	private static void engineerMenu() throws Exception {
 		do {
-			System.out.println("/n Choose an option:");
+			System.out.println("\n Choose an option:");
 			System.out.println("1. View product");
 			System.out.println("2. Add new product");
 			System.out.println("3. Remove product");

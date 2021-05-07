@@ -17,7 +17,7 @@ public class JDBCManager implements DBManager {
 			c = DriverManager.getConnection("jdbc:sqlite:./db/bionicsproInc.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
-			//this.createTables();
+			this.createTables();
 		} catch (SQLException sqlE) {
 			System.out.println("There was a database exception.");
 			sqlE.printStackTrace();
@@ -48,7 +48,8 @@ public class JDBCManager implements DBManager {
 					+ " first_name     TEXT     NOT NULL, " + " last_name   TEXT  	NOT NULL, "
 					+ " age INTEGER NOT NULL," + " gender TEXT NOT NULL,"
 					+ " phone INTEGER NOT NULL," + " email TEXT NOT NULL," + " street TEXT NOT NULL,"
-					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL)";
+					+ " city TEXT NOT NULL," + " postal_code INTEGER NOT NULL,"
+					+ " order_id INTEGER)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 
@@ -57,8 +58,8 @@ public class JDBCManager implements DBManager {
 					+ " name_surname     TEXT     NOT NULL UNIQUE, " + " contract_starting_date DATE NOT NULL UNIQUE,"
 					+ " contract_ending_date DATE NOT NULL," + " current_service TEXT NOT NULL,"
 					+ " salary REAL NOT NULL," + " bonus REAL NOT NULL," + " project_achieved INTEGER NOT NULL,"
-					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL,"
-					+ " product_id INETEGR NOT NULL REFERENCES products(id))";
+					+ " experience_in_years INTEGER NOT NULL," + " date_of_birth DATE NOT NULL)";
+					
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
 
@@ -70,11 +71,11 @@ public class JDBCManager implements DBManager {
 			stmt5.close();
 
 			//TODO Repasar las tablas bien
-			/*Statement stmt6 = c.createStatement();
+			Statement stmt6 = c.createStatement();
 			String sql6 = "CREATE TABLE order " + "(order_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " product_id INTEGER  REFERENCES products(id))";
 			stmt6.executeUpdate(sql6);
-			stmt6.close();*/
+			stmt6.close();
 
 			// now we create the table that references the N-N relationships
 
@@ -85,12 +86,12 @@ public class JDBCManager implements DBManager {
 			stmt7.close();
 
 			Statement stmt8 = c.createStatement();
-			String sql8 = "CREATE TABLE products_customers " + "(product_id INTEGER REFERENCES products(id),"
-					+ " customer_id INTEGER REFERENCES customer(id))";
+			String sql8 = "CREATE TABLE order_product " + "(order_id INTEGER REFERENCES customer(order_id),"
+					+ " product_id INTEGER REFERENCES products(id))";
 			stmt8.executeUpdate(sql8);
 			stmt8.close();
 
-			Statement stmt9 = c.createStatement();
+		    Statement stmt9 = c.createStatement();
 			String sql9 = "CREATE TABLE engineers_products " + "(engineer_id INTEGER REFERENCES engineer(id),"
 					+ " product_id INTEGER REFERENCES products(id))";
 			stmt9.executeUpdate(sql9);
@@ -206,7 +207,7 @@ public class JDBCManager implements DBManager {
 			String sql = "INSERT INTO customer (first_name, last_name, age, gender, phone, email, street, city, postal_code) "
 					+ " VALUES ('" + cust.getFirst_name() + "', '" + cust.getLast_name() + "','" + cust.getAge() + "','"
 					+ cust.getGender() + "','" + cust.getPhone() + "', " + "'" + cust.getEmail() + "','"
-					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "')";
+					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "');";
 			st.executeUpdate(sql);
 			st.close();
 		} catch (Exception e) {

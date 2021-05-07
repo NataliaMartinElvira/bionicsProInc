@@ -1,9 +1,14 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +18,23 @@ import bionicsproInc.db.pojos.Product;
 
 public class Main {
 
-	public static void main(String[] args) throws ParseException {
+	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
+	public static void main(String[] args) throws ParseException, IOException {
 		JDBCManager j = new JDBCManager();
 		j.connect();
 
-		Date d1  = new Date(2009,10,10);
-		Date d2 = new Date(2022,10,10);
-		Date d3 = new Date(1983,02,04);
+	/*	System.out.println("Introduce contract start : ");
+		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.println("Introduce contract end : ");
+		LocalDate endDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.println("Introduce birthdate : ");
+		LocalDate birthtDate = LocalDate.parse(reader.readLine(), formatter);
 		
-		Engineer e = new Engineer(1,"Jack Browne",d1,d2,"production control",4000.00f,3000.00f,3,8,d3);
-		j.addEngineer(e);
+		
+		Engineer e = new Engineer(4,"Mamadu Bongo",Date.valueOf(startDate),Date.valueOf(endDate),"Developpement service",5000.00f,2000.00f,2,4,Date.valueOf(birthtDate));
+		j.addEngineer(e); */
 		
 		j.disconnect();
 	}

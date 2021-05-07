@@ -204,10 +204,10 @@ public class JDBCManager implements DBManager {
 	public void addCustomer(Customer cust) {
 		try {
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO customer (first_name, last_name, age, gender, phone, email, street, city, postal_code) "
-					+ " VALUES ('" + cust.getFirst_name() + "', '" + cust.getLast_name() + "','" + cust.getAge() + "','"
+			String sql = "INSERT INTO customer (person_id, first_name, last_name, age, gender, phone, email, street, city, postal_code, order_id) "
+					+ " VALUES ('" +cust.getId() + "', '" +  cust.getFirst_name() + "', '" + cust.getLast_name() + "','" + cust.getAge() + "','"
 					+ cust.getGender() + "','" + cust.getPhone() + "', " + "'" + cust.getEmail() + "','"
-					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "');";
+					+ cust.getStreet() + "','" + cust.getCity() + "','" + cust.getPostal_code() + "','" + cust.getOrder_id() + "');";
 			st.executeUpdate(sql);
 			st.close();
 		} catch (Exception e) {

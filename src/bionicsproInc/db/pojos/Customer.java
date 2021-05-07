@@ -2,8 +2,9 @@ package bionicsproInc.db.pojos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-enum gender {
+enum Gender {
 	MALE, FEMALE;
 }
 
@@ -16,30 +17,45 @@ public class Customer implements Serializable {
 	private String first_name;
 	private String last_name;
 	private int age;
-	private gender Gender;
+	private Gender gender;
 	private int phone;
 	private String email;
 	private String street;
 	private String city;
 	private int postal_code;
 	private ArrayList<Order> orders;
-	private ArrayList<Product> products;
+	private int order_id;
 
-	public Customer(int id, String first_name, String last_name, int age, gender gender, int phone, String email,
-			String street, String city, int postal_code, ArrayList<Order> orders, ArrayList<Product> products) {
-		super();
+	public Customer(int id, String first_name, String last_name, int age, String gender, int phone, String email,
+			String street, String city, int postal_code, ArrayList<Order> orders) {
+
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.age = age;
-		Gender = gender;
+		this.gender = Gender.valueOf(gender);
 		this.phone = phone;
 		this.email = email;
 		this.street = street;
 		this.city = city;
 		this.postal_code = postal_code;
 		this.orders = orders;
-		this.products = products;
+	}
+	
+	public Customer(int id, String first_name, String last_name, int age, String gender, int phone, String email,
+			String street, String city, int postal_code, int order_id) {
+
+		this.id = id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.age = age;
+		this.gender = Gender.valueOf(gender);
+		this.phone = phone;
+		this.email = email;
+		this.street = street;
+		this.city = city;
+		this.postal_code = postal_code;
+		this.order_id = order_id;
 	}
 
 	public Customer(int id, ArrayList<Order> orders) {
@@ -80,12 +96,12 @@ public class Customer implements Serializable {
 		this.age = age;
 	}
 
-	public gender getGender() {
-		return Gender;
+	public Gender getGender() {
+		return this.gender;
 	}
 
 	public void setGender(String gender) {
-		Gender = bionicsproInc.db.pojos.gender.valueOf(gender);
+		this.gender = Gender.valueOf(gender);
 	}
 
 	public int getPhone() {
@@ -132,23 +148,23 @@ public class Customer implements Serializable {
 		return orders;
 	}
 
-	public void setOrdes(ArrayList<Order> orders) {
+	public void setOrders(ArrayList<Order> orders) {
 		this.orders = orders;
 	}
-
-	public ArrayList<Product> getProducts() {
-		return products;
+	public int getOrder_id() {
+		return order_id;
 	}
 
-	public void setProducts(ArrayList<Product> products) {
-		this.products = products;
+	public void setOrder_id(int order_id) {
+		this.order_id = order_id;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Gender == null) ? 0 : Gender.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + age;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -158,7 +174,6 @@ public class Customer implements Serializable {
 		result = prime * result + ((orders == null) ? 0 : orders.hashCode());
 		result = prime * result + phone;
 		result = prime * result + postal_code;
-		result = prime * result + ((products == null) ? 0 : products.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		return result;
 	}
@@ -172,7 +187,7 @@ public class Customer implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (Gender != other.Gender)
+		if (gender != other.gender)
 			return false;
 		if (age != other.age)
 			return false;
@@ -206,11 +221,6 @@ public class Customer implements Serializable {
 		if (phone != other.phone)
 			return false;
 		if (postal_code != other.postal_code)
-			return false;
-		if (products == null) {
-			if (other.products != null)
-				return false;
-		} else if (!products.equals(other.products))
 			return false;
 		if (street == null) {
 			if (other.street != null)

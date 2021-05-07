@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bionicsproInc.db.jdbc.JDBCManager;
+import bionicsproInc.db.pojos.Customer;
 import bionicsproInc.db.pojos.Engineer;
 import bionicsproInc.db.pojos.Product;
 
@@ -36,6 +37,8 @@ public class Main {
 		Engineer e = new Engineer(4,"Mamadu Bongo",Date.valueOf(startDate),Date.valueOf(endDate),"Developpement service",5000.00f,2000.00f,2,4,Date.valueOf(birthtDate));
 		j.addEngineer(e); */
 		
+		Customer c = new Customer(1,"Carlos ","SANTANA",12,"MALE", 000,"asasas.@g.es","xxx","xxxx",9292,1);
+		j.addCustomer(c);
 		j.disconnect();
 	}
 
